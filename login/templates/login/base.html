@@ -1,0 +1,121 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Онлайн-вікторина{% endblock %}</title>
+    <style>
+        :root {
+            --ink: #242018;
+            --muted: #746b5b;
+            --paper: #fffaf0;
+            --cream: #fff4d6;
+            --yellow: #ffc928;
+            --orange: #f47721;
+            --line: #ead9b5;
+            font-family: Georgia, 'Times New Roman', serif;
+            color: var(--ink);
+            background: var(--paper);
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: hidden; }
+        body::before, body::after { content: ''; position: fixed; z-index: -1; pointer-events: none; }
+        body::before { width: 280px; height: 280px; top: -70px; right: -75px; background: var(--yellow); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .72; }
+        body::after { width: 180px; height: 180px; bottom: 3%; left: -65px; border: 28px solid var(--orange); transform: rotate(18deg); opacity: .18; }
+
+        a { color: inherit; }
+        .site-shell { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+        .site-header { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+        .brand { display: inline-flex; align-items: center; gap: .75rem; font-size: 1.15rem; font-weight: bold; text-decoration: none; }
+        .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--orange); color: white; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); font-family: Arial, sans-serif; font-size: .9rem; }
+        .nav { display: flex; align-items: center; gap: 1.25rem; font-family: Arial, sans-serif; font-size: .85rem; }
+        .nav a { text-decoration: none; }
+        .nav a:hover { color: var(--orange); }
+        .nav-cta { padding: .65rem 1rem; border: 1px solid var(--ink); border-radius: 999px; }
+        .language-switcher select { padding: .45rem .35rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font-family: Arial, sans-serif; font-size: .72rem; font-weight: bold; }
+        .page-content { padding: 3rem 0 5rem; }
+        main { width: 100%; }
+        .hero { position: relative; padding: 3rem 0 5rem; }
+        .hero::after { content: ''; position: absolute; width: 90px; height: 90px; top: 20px; right: 12%; border: 16px solid var(--yellow); transform: rotate(45deg); opacity: .75; }
+        .eyebrow { margin-bottom: .8rem; color: var(--orange); font-family: Arial, sans-serif; font-size: .72rem; font-weight: bold; letter-spacing: .12em; text-transform: uppercase; }
+        .hero-copy { max-width: 520px; font-size: 1.08rem; }
+        .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 1.5rem; }
+        .section-heading h2 { margin-bottom: 0; }
+        .text-link, .quiz-placeholder a { color: var(--orange); font-family: Arial, sans-serif; font-size: .85rem; font-weight: bold; text-decoration: none; }
+        .quiz-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+        .quiz-placeholder { min-height: 230px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 1.5rem; border: 1px solid var(--line); border-radius: 4px; background: rgb(255 255 255 / 58%); }
+        .quiz-placeholder h3 { margin: .4rem 0 .5rem; font-size: 1.5rem; }
+        .quiz-placeholder p { max-width: 330px; margin-bottom: 1.2rem; }
+        .featured-placeholder { background: var(--yellow); border-color: var(--yellow); }
+        .featured-placeholder p { color: var(--ink); }
+        .placeholder-number { align-self: flex-end; font-family: Arial, sans-serif; font-size: .72rem; font-weight: bold; }
+        .action-strip { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 5rem; padding: 2rem; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+        .action-strip h2 { margin-bottom: .4rem; }
+        .action-strip p { margin-bottom: 0; }
+        .empty-form-placeholder { min-width: 260px; display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 2px solid var(--orange); color: var(--muted); font-family: Arial, sans-serif; font-size: .85rem; }
+        .empty-form-placeholder span { color: var(--orange); font-size: 1.2rem; }
+        h1, h2, p { margin-top: 0; }
+        h1 { max-width: 680px; margin-bottom: 1.25rem; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .92; letter-spacing: 0; }
+        h2 { font-size: 1.7rem; }
+        p { color: var(--muted); line-height: 1.6; }
+        form p { display: grid; gap: .4rem; }
+        input { box-sizing: border-box; width: 100%; padding: .7rem; border: 1px solid var(--line); border-radius: 6px; background: white; }
+        button, .button { display: inline-block; border: 0; border-radius: 999px; padding: .8rem 1.15rem; background: var(--orange); color: white; font-family: Arial, sans-serif; font-weight: bold; text-decoration: none; cursor: pointer; }
+        button:hover, .button:hover { background: #d85e12; }
+        .secondary { background: var(--ink); }
+        .links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .errorlist { color: #b42318; padding-left: 1.2rem; }
+        .site-footer { padding: 1.25rem 0; border-top: 1px solid var(--line); color: var(--muted); font-family: Arial, sans-serif; font-size: .78rem; }
+        @media (max-width: 640px) {
+            .site-shell { width: min(100% - 2rem, 1180px); }
+            .site-header { align-items: flex-start; }
+            .nav { gap: .7rem; }
+            .nav a:not(.nav-cta) { display: none; }
+            .page-content { padding-top: 2rem; }
+            .hero { padding: 1rem 0 3.5rem; }
+            .hero::after { width: 48px; height: 48px; border-width: 9px; right: 5%; }
+            .section-heading, .action-strip { align-items: flex-start; flex-direction: column; }
+            .quiz-grid { grid-template-columns: 1fr; }
+            .action-strip { margin-top: 3rem; padding: 1.5rem 0; }
+            .empty-form-placeholder { width: 100%; min-width: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-shell">
+        <header class="site-header">
+            <a class="brand" href="{% url 'home' %}">
+                <span class="brand-mark">Q</span>
+                <span>Квізер</span>
+            </a>
+            <nav class="nav" aria-label="Основна навігація">
+                <a href="{% url 'home' %}">{% if LANGUAGE_CODE == 'en' %}Home{% else %}Головна{% endif %}</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}">{% if LANGUAGE_CODE == 'en' %}Profile{% else %}Профіль{% endif %}</a>
+                    <a class="nav-cta" href="{% url 'logout' %}">{% if LANGUAGE_CODE == 'en' %}Log out{% else %}Вийти{% endif %}</a>
+                {% else %}
+                    <a class="nav-cta" href="{% url 'login' %}">{% if LANGUAGE_CODE == 'en' %}Log in{% else %}Увійти{% endif %}</a>
+                {% endif %}
+                <form class="language-switcher" action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <select name="language" onchange="this.form.submit()" aria-label="Мова">
+                        <option value="uk"{% if LANGUAGE_CODE == 'uk' %} selected{% endif %}>UA</option>
+                        <option value="en"{% if LANGUAGE_CODE == 'en' %} selected{% endif %}>EN</option>
+                    </select>
+                </form>
+            </nav>
+        </header>
+        <main class="page-content">
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="site-footer">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% if LANGUAGE_CODE == 'en' %}Online quiz · a space for curious challenges{% else %}Онлайн-вікторина · простір для цікавих змагань{% endif %}
+        </footer>
+    </div>
+</body>
+</html>

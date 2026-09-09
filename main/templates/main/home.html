@@ -1,0 +1,54 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}Головна | Онлайн-вікторина{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Learn · play · win{% else %}Пізнавай · грай · перемагай{% endif %}</p>
+    <h1>{% if LANGUAGE_CODE == 'en' %}Your next great quiz starts here.{% else %}Твоя наступна велика вікторина починається тут.{% endif %}</h1>
+    <p class="hero-copy">{% if LANGUAGE_CODE == 'en' %}Create your own questions, join challenges with a code and test your knowledge with others.{% else %}Створюй власні запитання, приєднуйся до змагань за кодом та перевіряй свої знання разом з іншими.{% endif %}</p>
+    <div class="links">
+        {% if user.is_authenticated %}
+            <a class="button" href="#create-quiz">{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}</a>
+            <a class="button secondary" href="#join-quiz">{% if LANGUAGE_CODE == 'en' %}Join with a code{% else %}Приєднатися за кодом{% endif %}</a>
+        {% else %}
+            <a class="button" href="{% url 'register' %}">{% if LANGUAGE_CODE == 'en' %}Create an account{% else %}Створити акаунт{% endif %}</a>
+            <a class="button secondary" href="{% url 'login' %}">{% if LANGUAGE_CODE == 'en' %}Log in{% else %}Увійти{% endif %}</a>
+        {% endif %}
+    </div>
+</section>
+
+<section class="quiz-sections" aria-label="Вікторини">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Choose your game{% else %}Обирай свою гру{% endif %}</p>
+            <h2>{% if LANGUAGE_CODE == 'en' %}Quizzes for you{% else %}Вікторини для тебе{% endif %}</h2>
+        </div>
+        <a class="text-link" href="#all-quizzes">{% if LANGUAGE_CODE == 'en' %}View all →{% else %}Переглянути всі →{% endif %}</a>
+    </div>
+    <div class="quiz-grid">
+        <article class="quiz-placeholder featured-placeholder">
+            <span class="placeholder-number">01</span>
+            <h3>{% if LANGUAGE_CODE == 'en' %}Popular quizzes{% else %}Популярні вікторини{% endif %}</h3>
+            <p>{% if LANGUAGE_CODE == 'en' %}The community's most popular games will appear here.{% else %}Тут з'являться найпопулярніші ігри спільноти.{% endif %}</p>
+            <a href="#popular">{% if LANGUAGE_CODE == 'en' %}Open collection →{% else %}Відкрити добірку →{% endif %}</a>
+        </article>
+        <article class="quiz-placeholder">
+            <span class="placeholder-number">02</span>
+            <h3>{% if LANGUAGE_CODE == 'en' %}New quizzes{% else %}Нові вікторини{% endif %}</h3>
+            <p>{% if LANGUAGE_CODE == 'en' %}A place for fresh quizzes from platform creators.{% else %}Місце для свіжих вікторин від авторів платформи.{% endif %}</p>
+            <a href="#new">{% if LANGUAGE_CODE == 'en' %}See what's new →{% else %}Дивитися новинки →{% endif %}</a>
+        </article>
+    </div>
+</section>
+
+<section class="action-strip" id="join-quiz">
+    <div>
+        <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Quick start{% else %}Швидкий старт{% endif %}</p>
+        <h2>{% if LANGUAGE_CODE == 'en' %}Have an invitation code?{% else %}Є код запрошення?{% endif %}</h2>
+        <p>{% if LANGUAGE_CODE == 'en' %}The quiz join form will appear here.{% else %}Форма для підключення до вікторини з'явиться тут.{% endif %}</p>
+    </div>
+    <div class="empty-form-placeholder">{% if LANGUAGE_CODE == 'en' %}Enter code{% else %}Введіть код{% endif %} <span>→</span></div>
+</section>
+{% endblock %}
