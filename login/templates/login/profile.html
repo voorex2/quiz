@@ -1,0 +1,12 @@
+{% extends 'login/base.html' %}
+
+{% block title %}Профіль{% endblock %}
+
+{% block content %}
+<h1>Профіль</h1>
+<p>Ви увійшли як <strong>{{ user.username }}</strong>.</p>
+<p>Email: {{ user.email|default:'не вказано' }}</p>
+<div class="links">
+    <a class="button secondary" href="{% url 'logout' %}">Вийти</a>
+</div>
+{% endblock %}

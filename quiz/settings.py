@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'quiz.urls'
+
+LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 TEMPLATES = [
     {

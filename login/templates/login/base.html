@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Онлайн-вікторина{% endblock %}</title>
+    <style>
+        :root { font-family: Arial, sans-serif; color: #1f2937; background: #f3f4f6; }
+        body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
+        main { width: min(100% - 2rem, 28rem); background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 8px 30px rgb(15 23 42 / 12%); }
+        h1 { margin-top: 0; }
+        form p { display: grid; gap: .4rem; }
+        input { box-sizing: border-box; width: 100%; padding: .7rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+        button, .button { display: inline-block; border: 0; border-radius: 6px; padding: .7rem 1rem; background: #2563eb; color: white; text-decoration: none; cursor: pointer; }
+        .secondary { background: #64748b; }
+        .links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .errorlist { color: #b91c1c; padding-left: 1.2rem; }
+    </style>
+</head>
+<body>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
