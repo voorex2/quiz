@@ -1,0 +1,21 @@
+{% extends 'login/base.html' %}
+
+{% block title %}Головна | Онлайн-вікторина{% endblock %}
+
+{% block content %}
+<h1>Онлайн-вікторина</h1>
+<p>Створюй вікторини, перевіряй свої знання та змагайся з іншими учасниками.</p>
+
+{% if user.is_authenticated %}
+    <p>Вітаємо, <strong>{{ user.username }}</strong>!</p>
+    <div class="links">
+        <a class="button" href="{% url 'profile' %}">Мій профіль</a>
+        <a class="button secondary" href="{% url 'logout' %}">Вийти</a>
+    </div>
+{% else %}
+    <div class="links">
+        <a class="button" href="{% url 'login' %}">Увійти</a>
+        <a class="button secondary" href="{% url 'register' %}">Зареєструватися</a>
+    </div>
+{% endif %}
+{% endblock %}
