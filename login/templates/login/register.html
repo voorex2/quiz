@@ -1,15 +1,17 @@
 {% extends 'login/base.html' %}
+{% load i18n %}
 
-{% block title %}Реєстрація{% endblock %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% if LANGUAGE_CODE == 'en' %}Registration{% else %}Реєстрація{% endif %}{% endblock %}
 
 {% block content %}
-<h1>Реєстрація</h1>
+<h1>{% if LANGUAGE_CODE == 'en' %}Registration{% else %}Реєстрація{% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Зареєструватися</button>
+    <button type="submit">{% if LANGUAGE_CODE == 'en' %}Register{% else %}Зареєструватися{% endif %}</button>
 </form>
 <div class="links">
-    <a class="button secondary" href="{% url 'login' %}">Уже є акаунт</a>
+    <a class="button secondary" href="{% url 'login' %}">{% if LANGUAGE_CODE == 'en' %}Already have an account{% else %}Уже є акаунт{% endif %}</a>
 </div>
 {% endblock %}

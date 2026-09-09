@@ -39,3 +39,55 @@ class AuthenticationTests(TestCase):
 		response = self.client.get('/profile/')
 
 		self.assertRedirects(response, '/login/?next=/profile/')
+
+	def test_home_can_be_viewed_in_english(self):
+		response = self.client.post('/i18n/setlang/', {'language': 'en', 'next': '/'})
+
+		self.assertRedirects(response, '/')
+		response = self.client.get('/')
+		self.assertContains(response, 'Your next great quiz starts here.')
+		self.assertContains(response, 'Log in')
+
+	def test_user_can_change_username(self):
+		user = User.objects.create_user(username='anna', password='StrongPassword123!')
+		self.client.force_login(user)
+
+		response = self.client.post('/profile/username/', {'username': 'olena'})
+
+		self.assertRedirects(response, '/profile/')
+		user.refresh_from_db()
+		self.assertEqual(user.username, 'olena')
+
+	def test_user_can_change_password_with_old_password(self):
+		user = User.objects.create_user(username='anna', password='StrongPassword123!')
+		self.client.force_login(user)
+
+		response = self.client.post(
+			'/profile/password/',
+			{
+				'old_password': 'StrongPassword123!',
+				'new_password1': 'NewStrongPassword456!',
+				'new_password2': 'NewStrongPassword456!',
+			},
+		)
+
+		self.assertRedirects(response, '/profile/')
+		user.refresh_from_db()
+		self.assertTrue(user.check_password('NewStrongPassword456!'))
+
+	def test_password_change_rejects_wrong_old_password(self):
+		user = User.objects.create_user(username='anna', password='StrongPassword123!')
+		self.client.force_login(user)
+
+		response = self.client.post(
+			'/profile/password/',
+			{
+				'old_password': 'wrong-password',
+				'new_password1': 'NewStrongPassword456!',
+				'new_password2': 'NewStrongPassword456!',
+			},
+		)
+
+		self.assertEqual(response.status_code, 200)
+		self.assertContains(response, 'Введено неправильний поточний пароль')
+		self.assertTrue(user.check_password('StrongPassword123!'))

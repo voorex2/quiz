@@ -1,5 +1,7 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
-<html lang="uk">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,6 +35,7 @@
         .nav a { text-decoration: none; }
         .nav a:hover { color: var(--orange); }
         .nav-cta { padding: .65rem 1rem; border: 1px solid var(--ink); border-radius: 999px; }
+        .language-switcher select { padding: .45rem .35rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font-family: Arial, sans-serif; font-size: .72rem; font-weight: bold; }
         .page-content { padding: 3rem 0 5rem; }
         main { width: 100%; }
         .hero { position: relative; padding: 3rem 0 5rem; }
@@ -89,19 +92,30 @@
                 <span>Квізер</span>
             </a>
             <nav class="nav" aria-label="Основна навігація">
-                <a href="{% url 'home' %}">Головна</a>
+                <a href="{% url 'home' %}">{% if LANGUAGE_CODE == 'en' %}Home{% else %}Головна{% endif %}</a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'profile' %}">Профіль</a>
-                    <a class="nav-cta" href="{% url 'logout' %}">Вийти</a>
+                    <a href="{% url 'profile' %}">{% if LANGUAGE_CODE == 'en' %}Profile{% else %}Профіль{% endif %}</a>
+                    <a class="nav-cta" href="{% url 'logout' %}">{% if LANGUAGE_CODE == 'en' %}Log out{% else %}Вийти{% endif %}</a>
                 {% else %}
-                    <a class="nav-cta" href="{% url 'login' %}">Увійти</a>
+                    <a class="nav-cta" href="{% url 'login' %}">{% if LANGUAGE_CODE == 'en' %}Log in{% else %}Увійти{% endif %}</a>
                 {% endif %}
+                <form class="language-switcher" action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <select name="language" onchange="this.form.submit()" aria-label="Мова">
+                        <option value="uk"{% if LANGUAGE_CODE == 'uk' %} selected{% endif %}>UA</option>
+                        <option value="en"{% if LANGUAGE_CODE == 'en' %} selected{% endif %}>EN</option>
+                    </select>
+                </form>
             </nav>
         </header>
         <main class="page-content">
             {% block content %}{% endblock %}
         </main>
-        <footer class="site-footer">Онлайн-вікторина · простір для цікавих змагань</footer>
+        <footer class="site-footer">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% if LANGUAGE_CODE == 'en' %}Online quiz · a space for curious challenges{% else %}Онлайн-вікторина · простір для цікавих змагань{% endif %}
+        </footer>
     </div>
 </body>
 </html>
