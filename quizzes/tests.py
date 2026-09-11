@@ -26,35 +26,34 @@ class QuizTests(TestCase):
         self.assertRedirects(response, '/quizzes/1/')
         self.assertTrue(Quiz.objects.filter(owner=user, title='Моя вікторина').exists())
 
-    def test_owner_can_add_question_and_answers(self):
+    def test_user_can_create_quiz_with_questions(self):
         user = User.objects.create_user(username='author', password='StrongPassword123!')
-        quiz = Quiz.objects.create(owner=user, title='Моя вікторина', is_published=True)
         self.client.force_login(user)
 
         response = self.client.post(
-            f'/quizzes/{quiz.pk}/questions/add/',
+            '/quizzes/create/',
             {
-                'text': 'Скільки буде 2 + 2?',
-                'question_type': 'text',
-                'media_url': '',
-                'time_limit': 30,
-                'order': 1,
-                'answers-TOTAL_FORMS': 4,
-                'answers-INITIAL_FORMS': 0,
-                'answers-MIN_NUM_FORMS': 2,
-                'answers-MAX_NUM_FORMS': 1000,
-                'answers-0-text': '3',
-                'answers-0-is_correct': '',
-                'answers-1-text': '4',
-                'answers-1-is_correct': 'on',
-                'answers-2-text': '5',
-                'answers-2-is_correct': '',
-                'answers-3-text': '',
-                'answers-3-is_correct': '',
+                'title': 'Моя вікторина',
+                'description': 'Опис',
+                'is_published': True,
+                'questions-TOTAL_FORMS': 1,
+                'questions-INITIAL_FORMS': 0,
+                'questions-MIN_NUM_FORMS': 0,
+                'questions-MAX_NUM_FORMS': 1000,
+                'questions-0-text': 'Скільки буде 2 + 2?',
+                'questions-0-question_type': 'text',
+                'questions-0-media_url': '',
+                'questions-0-time_limit': 30,
+                'questions-0-answer_1': '3',
+                'questions-0-answer_2': '4',
+                'questions-0-answer_3': '5',
+                'questions-0-answer_4': '',
+                'questions-0-correct_answer': '2',
             },
         )
 
-        self.assertRedirects(response, f'/quizzes/{quiz.pk}/')
+        self.assertRedirects(response, '/quizzes/1/')
+        quiz = Quiz.objects.get(title='Моя вікторина')
         question = Question.objects.get(quiz=quiz)
         self.assertEqual(question.answers.count(), 3)
         self.assertTrue(question.answers.get(text='4').is_correct)

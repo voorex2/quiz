@@ -17,7 +17,7 @@
 {% endif %}
 {% if user == quiz.owner %}
 	<div class="links">
-		<a class="button secondary" href="{% url 'question_create' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Add a question{% else %}Додати питання{% endif %}</a>
+		<a class="button secondary" href="{% url 'quiz_edit' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Edit quiz{% else %}Редагувати вікторину{% endif %}</a>
 	</div>
 {% endif %}
 {% endblock %}
