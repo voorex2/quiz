@@ -12,14 +12,16 @@ class QuizForm(forms.ModelForm):
             self.fields['title'].label = 'Quiz title'
             self.fields['description'].label = 'Description'
             self.fields['is_published'].label = 'Publish quiz'
+            self.fields['is_private'].label = 'Private quiz with invite code'
         else:
             self.fields['title'].label = 'Назва вікторини'
             self.fields['description'].label = 'Опис'
             self.fields['is_published'].label = 'Опублікувати вікторину'
+            self.fields['is_private'].label = 'Приватна вікторина за кодом'
 
     class Meta:
         model = Quiz
-        fields = ('title', 'description', 'is_published')
+        fields = ('title', 'description', 'is_published', 'is_private')
 
 
 class QuestionForm(forms.ModelForm):

@@ -1,14 +1,32 @@
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.http import Http404
+from django.db.models import Count
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import QuestionEditorFormSet, QuizForm
-from .models import Answer, Question, Quiz
+from .models import Answer, Question, Quiz, QuizLike
 
 
 def quiz_list_view(request):
-    quizzes = Quiz.objects.filter(is_published=True).select_related('owner')
-    return render(request, 'quizzes/quiz_list.html', {'quizzes': quizzes})
+    search_query = request.GET.get('q', '').strip()
+    show_mine = request.GET.get('mine') == '1' and request.user.is_authenticated
+
+    if show_mine:
+        quizzes = Quiz.objects.filter(owner=request.user)
+    else:
+        quizzes = Quiz.objects.filter(is_published=True, is_private=False)
+
+    if search_query:
+        quizzes = quizzes.filter(Q(title__icontains=search_query))
+
+    quizzes = quizzes.select_related('owner').annotate(like_count=Count('likes'))
+    return render(
+        request,
+        'quizzes/quiz_list.html',
+        {'quizzes': quizzes, 'search_query': search_query, 'show_mine': show_mine},
+    )
 
 
 @login_required
@@ -53,8 +71,47 @@ def quiz_edit_view(request, pk):
 
 
 def quiz_detail_view(request, pk):
-    quiz = get_object_or_404(Quiz, pk=pk, is_published=True)
-    return render(request, 'quizzes/quiz_detail.html', {'quiz': quiz})
+    quiz = get_object_or_404(Quiz.objects.annotate(like_count=Count('likes')), pk=pk)
+    if not quiz.is_published and quiz.owner_id != request.user.id:
+        raise Http404('Quiz not found')
+    can_view_private = not quiz.is_private or quiz.owner_id == request.user.id or request.session.get(f'joined_quiz_{quiz.pk}')
+    if not can_view_private:
+        return redirect('quiz_join')
+    liked = request.user.is_authenticated and QuizLike.objects.filter(quiz=quiz, user=request.user).exists()
+    return render(request, 'quizzes/quiz_detail.html', {'quiz': quiz, 'liked': liked})
+
+
+@login_required
+def quiz_like_view(request, pk):
+    if request.method == 'POST':
+        quiz = get_object_or_404(Quiz, pk=pk, is_published=True, is_private=False)
+        QuizLike.objects.get_or_create(quiz=quiz, user=request.user)
+    return redirect('quiz_detail', pk=pk)
+
+
+@login_required
+def quiz_delete_view(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk, owner=request.user)
+    if request.method == 'POST':
+        quiz.delete()
+        return redirect('quiz_list')
+    return redirect('quiz_detail', pk=pk)
+
+
+def quiz_join_view(request):
+    error = None
+    if request.method == 'POST':
+        code = request.POST.get('invite_code', '').strip().upper()
+        quiz = Quiz.objects.filter(invite_code=code, is_private=True, is_published=True).first()
+        if quiz:
+            request.session[f'joined_quiz_{quiz.pk}'] = True
+            return redirect('quiz_detail', pk=quiz.pk)
+        error = 'Вікторину за таким кодом не знайдено.'
+    return render(request, 'quizzes/quiz_join.html', {'error': error})
+
+
+def _can_access_quiz(request, quiz):
+    return not quiz.is_private or quiz.owner_id == request.user.id or request.session.get(f'joined_quiz_{quiz.pk}')
 
 
 @login_required
@@ -120,6 +177,8 @@ def _save_question_forms(quiz, question_formset):
 
 def quiz_take_view(request, pk):
     quiz = get_object_or_404(Quiz.objects.prefetch_related('questions__answers'), pk=pk, is_published=True)
+    if not _can_access_quiz(request, quiz):
+        return redirect('quiz_join')
     questions = list(quiz.questions.all())
 
     if request.method == 'POST':

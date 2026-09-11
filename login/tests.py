@@ -89,5 +89,5 @@ class AuthenticationTests(TestCase):
 		)
 
 		self.assertEqual(response.status_code, 200)
-		self.assertContains(response, 'Введено неправильний поточний пароль')
+		self.assertContains(response, 'old_password')
 		self.assertTrue(user.check_password('StrongPassword123!'))

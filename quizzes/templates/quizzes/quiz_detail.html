@@ -9,7 +9,21 @@
 <div class="quiz-meta">
 	<span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Author{% else %}Автор{% endif %}: {{ quiz.owner.username }}</span>
 	<span class="meta-pill">{{ quiz.questions.count }} {% if LANGUAGE_CODE == 'en' %}questions{% else %}питань{% endif %}</span>
+	<span class="meta-pill">{{ quiz.like_count }} ♥</span>
+	{% if quiz.is_private %}<span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Private{% else %}Приватна{% endif %}</span>{% endif %}
 </div>
+{% if user == quiz.owner and quiz.is_private %}
+	<div class="invite-code-panel">
+		<span>{% if LANGUAGE_CODE == 'en' %}Invite code{% else %}Код запрошення{% endif %}</span>
+		<strong>{{ quiz.invite_code }}</strong>
+	</div>
+{% endif %}
+{% if user.is_authenticated and not quiz.is_private %}
+	<form method="post" action="{% url 'quiz_like' quiz.pk %}" class="like-form">
+		{% csrf_token %}
+		<button type="submit" class="like-button"{% if liked %} disabled{% endif %}>♥ {% if liked %}{% if LANGUAGE_CODE == 'en' %}Liked{% else %}Вподобано{% endif %}{% else %}{% if LANGUAGE_CODE == 'en' %}Like{% else %}Подобається{% endif %}{% endif %}</button>
+	</form>
+{% endif %}
 {% if quiz.questions.exists %}
 	<a class="button" href="{% url 'quiz_take' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Take quiz{% else %}Пройти вікторину{% endif %}</a>
 {% else %}
@@ -18,6 +32,10 @@
 {% if user == quiz.owner %}
 	<div class="links">
 		<a class="button secondary" href="{% url 'quiz_edit' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Edit quiz{% else %}Редагувати вікторину{% endif %}</a>
+		<form method="post" action="{% url 'quiz_delete' quiz.pk %}" onsubmit="return confirm('{% if LANGUAGE_CODE == 'en' %}Delete this quiz permanently?{% else %}Видалити цю вікторину назавжди?{% endif %}');">
+			{% csrf_token %}
+			<button type="submit" class="danger-button">{% if LANGUAGE_CODE == 'en' %}Delete quiz{% else %}Видалити вікторину{% endif %}</button>
+		</form>
 	</div>
 {% endif %}
 {% endblock %}

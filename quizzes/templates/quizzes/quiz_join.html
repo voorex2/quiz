@@ -1,0 +1,22 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% if LANGUAGE_CODE == 'en' %}Join a private quiz{% else %}Приєднатися до приватної вікторини{% endif %}{% endblock %}
+
+{% block content %}
+<div class="surface form-shell">
+    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Invite only{% else %}Лише за запрошенням{% endif %}</p>
+    <h1>{% if LANGUAGE_CODE == 'en' %}Join a private quiz{% else %}Приєднатися до приватної вікторини{% endif %}</h1>
+    <p class="form-intro">{% if LANGUAGE_CODE == 'en' %}Enter the code shared by the quiz author.{% else %}Введи код, яким поділився автор вікторини.{% endif %}</p>
+    {% if error %}<p class="form-errors">{{ error }}</p>{% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="invite-code">{% if LANGUAGE_CODE == 'en' %}Invite code{% else %}Код запрошення{% endif %}</label>
+        <input id="invite-code" name="invite_code" maxlength="8" autocomplete="off" placeholder="ABCDERT" required>
+        <div class="form-actions">
+            <button type="submit">{% if LANGUAGE_CODE == 'en' %}Join quiz{% else %}Приєднатися{% endif %}</button>
+            <a class="back-link" href="{% url 'home' %}">{% if LANGUAGE_CODE == 'en' %}Back home{% else %}На головну{% endif %}</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

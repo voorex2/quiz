@@ -14,6 +14,7 @@
         {{ form.title }}
         {{ form.description }}
         <label class="setting-check">{{ form.is_published }} <span>{% if LANGUAGE_CODE == 'en' %}Publish quiz{% else %}Опублікувати вікторину{% endif %}</span></label>
+        <label class="setting-check">{{ form.is_private }} <span>{% if LANGUAGE_CODE == 'en' %}Private quiz with invite code{% else %}Приватна вікторина за кодом{% endif %}</span></label>
     </div>
     {% if form.errors %}<div class="form-errors">{{ form.errors }}</div>{% endif %}
 

@@ -1,4 +1,5 @@
-import uuid
+import secrets
+import string
 
 from django.conf import settings
 from django.db import models
@@ -13,8 +14,9 @@ class Quiz(models.Model):
         on_delete=models.CASCADE,
         related_name='owned_quizzes',
     )
-    invite_code = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    invite_code = models.CharField(max_length=8, unique=True, editable=False)
     is_published = models.BooleanField(default=False)
+    is_private = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,6 +27,12 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.invite_code:
+            alphabet = string.ascii_uppercase + string.digits
+            self.invite_code = ''.join(secrets.choice(alphabet) for _ in range(7))
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('quiz_detail', kwargs={'pk': self.pk})
@@ -61,3 +69,17 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class QuizLike(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='quiz_likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(fields=('quiz', 'user'), name='unique_quiz_like_per_user'),
+        )
+
+    def __str__(self):
+        return f'{self.user} likes {self.quiz}'

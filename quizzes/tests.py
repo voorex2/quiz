@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from .models import Answer, Question, Quiz
+from .models import Answer, Question, Quiz, QuizLike
 
 
 class QuizTests(TestCase):
@@ -13,6 +13,49 @@ class QuizTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Загальна вікторина')
+
+    def test_quiz_list_can_search_by_title(self):
+        user = User.objects.create_user(username='author', password='StrongPassword123!')
+        Quiz.objects.create(owner=user, title='Математика', is_published=True)
+        Quiz.objects.create(owner=user, title='Історія', is_published=True)
+
+        response = self.client.get('/quizzes/?q=матем')
+
+        self.assertContains(response, 'Математика')
+        self.assertNotContains(response, 'Історія')
+
+    def test_my_quizzes_filter_shows_only_current_user_quizzes(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        other_user = User.objects.create_user(username='other', password='StrongPassword123!')
+        Quiz.objects.create(owner=owner, title='Моя чернетка')
+        Quiz.objects.create(owner=other_user, title='Чужа вікторина', is_published=True)
+        self.client.force_login(owner)
+
+        response = self.client.get('/quizzes/?mine=1')
+
+        self.assertContains(response, 'Моя чернетка')
+        self.assertNotContains(response, 'Чужа вікторина')
+
+    def test_owner_can_delete_quiz(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Видалити мене')
+        self.client.force_login(owner)
+
+        response = self.client.post(f'/quizzes/{quiz.pk}/delete/')
+
+        self.assertRedirects(response, '/quizzes/')
+        self.assertFalse(Quiz.objects.filter(pk=quiz.pk).exists())
+
+    def test_other_user_cannot_delete_quiz(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        visitor = User.objects.create_user(username='visitor', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Не видаляти')
+        self.client.force_login(visitor)
+
+        response = self.client.post(f'/quizzes/{quiz.pk}/delete/')
+
+        self.assertEqual(response.status_code, 404)
+        self.assertTrue(Quiz.objects.filter(pk=quiz.pk).exists())
 
     def test_user_can_create_quiz(self):
         user = User.objects.create_user(username='author', password='StrongPassword123!')
@@ -103,3 +146,45 @@ class QuizTests(TestCase):
 
         self.assertContains(response, 'Author')
         self.assertContains(response, 'This quiz has no questions yet.')
+
+    def test_user_can_like_quiz_only_once(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        user = User.objects.create_user(username='player', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Популярна', is_published=True)
+        self.client.force_login(user)
+
+        self.client.post(f'/quizzes/{quiz.pk}/like/')
+        self.client.post(f'/quizzes/{quiz.pk}/like/')
+
+        self.assertEqual(QuizLike.objects.filter(quiz=quiz, user=user).count(), 1)
+
+    def test_private_quiz_requires_invite_code(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Приватна', is_published=True, is_private=True)
+
+        response = self.client.get(f'/quizzes/{quiz.pk}/')
+        self.assertRedirects(response, '/quizzes/join/')
+
+        response = self.client.post('/quizzes/join/', {'invite_code': quiz.invite_code.lower()})
+        self.assertRedirects(response, f'/quizzes/{quiz.pk}/')
+        self.assertEqual(self.client.get(f'/quizzes/{quiz.pk}/').status_code, 200)
+        self.assertEqual(len(quiz.invite_code), 7)
+
+    def test_owner_can_open_unpublished_quiz(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Чернетка', is_published=False)
+        self.client.force_login(owner)
+
+        response = self.client.get(f'/quizzes/{quiz.pk}/')
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_other_users_cannot_open_unpublished_quiz(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        visitor = User.objects.create_user(username='visitor', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Чернетка', is_published=False)
+        self.client.force_login(visitor)
+
+        response = self.client.get(f'/quizzes/{quiz.pk}/')
+
+        self.assertEqual(response.status_code, 404)
