@@ -1,12 +1,20 @@
 {% extends 'login/base.html' %}
+{% load i18n %}
 
-{% block title %}Створити вікторину{% endblock %}
+{% block title %}{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}{% endblock %}
 
 {% block content %}
-<h1>Створити вікторину</h1>
-<form method="post">
+<div class="surface form-shell">
+    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}New project{% else %}Новий проєкт{% endif %}</p>
+    <h1>{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}</h1>
+    <p class="form-intro">{% if LANGUAGE_CODE == 'en' %}Add a title and short description. Then you can add questions and answer options.{% else %}Додай назву та короткий опис. Після цього ти зможеш додати питання й варіанти відповідей.{% endif %}</p>
+    <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Створити</button>
-</form>
+        <div class="form-actions">
+            <button type="submit">{% if LANGUAGE_CODE == 'en' %}Create and add questions{% else %}Створити та додати питання{% endif %}</button>
+            <a class="back-link" href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}Cancel{% else %}Скасувати{% endif %}</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

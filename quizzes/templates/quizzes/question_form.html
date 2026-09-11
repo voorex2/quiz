@@ -1,0 +1,28 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% if LANGUAGE_CODE == 'en' %}Add a question{% else %}Додати питання{% endif %}{% endblock %}
+
+{% block content %}
+<div class="surface form-shell">
+    <p class="eyebrow">{{ quiz.title }}</p>
+    <h1>{% if LANGUAGE_CODE == 'en' %}Add a question{% else %}Додати питання{% endif %}</h1>
+    <p class="form-intro">{% if LANGUAGE_CODE == 'en' %}Write a question, set the time limit and mark the correct answer.{% else %}Сформулюй питання, задай час і познач правильний варіант відповіді.{% endif %}</p>
+    <form method="post">
+    {% csrf_token %}
+    {{ question_form.as_p }}
+    <h2>{% if LANGUAGE_CODE == 'en' %}Answer options{% else %}Варіанти відповідей{% endif %}</h2>
+    <p class="field-help">{% if LANGUAGE_CODE == 'en' %}Add at least two options and mark the correct one.{% else %}Додай щонайменше два варіанти та познач правильний.{% endif %}</p>
+    {{ answer_formset.management_form }}
+    {% for form in answer_formset %}
+        <div class="answer-row">
+            {{ form.as_p }}
+        </div>
+    {% endfor %}
+        <div class="form-actions">
+            <button type="submit">{% if LANGUAGE_CODE == 'en' %}Save question{% else %}Зберегти питання{% endif %}</button>
+            <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Back to quiz{% else %}Повернутися до вікторини{% endif %}</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

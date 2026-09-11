@@ -1,9 +1,23 @@
 {% extends 'login/base.html' %}
+{% load i18n %}
 
-{% block title %}{{ quiz.title }}{% endblock %}
+{% block title %}{{ quiz.title }} | {% if LANGUAGE_CODE == 'en' %}Quiz{% else %}Вікторина{% endif %}{% endblock %}
 
 {% block content %}
 <h1>{{ quiz.title }}</h1>
 <p>{{ quiz.description }}</p>
-<p>Питання та проходження вікторини будуть додані на наступному етапі.</p>
+<div class="quiz-meta">
+	<span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Author{% else %}Автор{% endif %}: {{ quiz.owner.username }}</span>
+	<span class="meta-pill">{{ quiz.questions.count }} {% if LANGUAGE_CODE == 'en' %}questions{% else %}питань{% endif %}</span>
+</div>
+{% if quiz.questions.exists %}
+	<a class="button" href="{% url 'quiz_take' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Take quiz{% else %}Пройти вікторину{% endif %}</a>
+{% else %}
+	<p>{% if LANGUAGE_CODE == 'en' %}This quiz has no questions yet.{% else %}У вікторині ще немає питань.{% endif %}</p>
+{% endif %}
+{% if user == quiz.owner %}
+	<div class="links">
+		<a class="button secondary" href="{% url 'question_create' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Add a question{% else %}Додати питання{% endif %}</a>
+	</div>
+{% endif %}
 {% endblock %}
