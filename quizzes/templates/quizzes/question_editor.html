@@ -1,0 +1,31 @@
+<article class="question-editor">
+    <div class="question-editor-heading">
+        <span class="question-number">{{ index }}</span>
+        <div>
+            <h3>{% if LANGUAGE_CODE == 'en' %}Question{% else %}Питання{% endif %} {{ index }}</h3>
+            <p>{% if LANGUAGE_CODE == 'en' %}One question, four answer slots, one correct choice.{% else %}Одне питання, чотири варіанти та одна правильна відповідь.{% endif %}</p>
+        </div>
+        <label class="remove-question">{{ form.DELETE }} {% if LANGUAGE_CODE == 'en' %}Remove{% else %}Видалити{% endif %}</label>
+    </div>
+    {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+    <div class="question-main-fields">
+        <div class="question-text-field">{{ form.text.label_tag }}{{ form.text }}</div>
+        <div>{{ form.question_type.label_tag }}{{ form.question_type }}</div>
+        <div>{{ form.time_limit.label_tag }}{{ form.time_limit }}</div>
+        <div>{{ form.media_url.label_tag }}{{ form.media_url }}</div>
+    </div>
+    {% if form.errors %}<div class="form-errors">{{ form.errors }}</div>{% endif %}
+    <div class="answer-editor">
+        <div class="answer-editor-title">
+            <strong>{% if LANGUAGE_CODE == 'en' %}Answers{% else %}Варіанти відповідей{% endif %}</strong>
+            <span>{% if LANGUAGE_CODE == 'en' %}Select the correct one{% else %}Обери правильний{% endif %}</span>
+        </div>
+        <div class="answer-grid">
+            <label class="answer-input">{{ form.answer_1.label_tag }}{{ form.answer_1 }}</label>
+            <label class="answer-input">{{ form.answer_2.label_tag }}{{ form.answer_2 }}</label>
+            <label class="answer-input">{{ form.answer_3.label_tag }}{{ form.answer_3 }}</label>
+            <label class="answer-input">{{ form.answer_4.label_tag }}{{ form.answer_4 }}</label>
+        </div>
+        <div class="correct-choice">{{ form.correct_answer.label_tag }}{{ form.correct_answer }}</div>
+    </div>
+</article>

@@ -1,0 +1,54 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% if is_editing %}{% if LANGUAGE_CODE == 'en' %}Edit quiz{% else %}Редагувати вікторину{% endif %}{% else %}{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="surface form-shell">
+    <p class="eyebrow">{% if is_editing %}{% if LANGUAGE_CODE == 'en' %}Quiz editor{% else %}Редактор вікторини{% endif %}{% else %}{% if LANGUAGE_CODE == 'en' %}New project{% else %}Новий проєкт{% endif %}{% endif %}</p>
+    <h1>{% if is_editing %}{% if LANGUAGE_CODE == 'en' %}Edit quiz{% else %}Редагувати вікторину{% endif %}{% else %}{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}{% endif %}</h1>
+    <p class="form-intro">{% if LANGUAGE_CODE == 'en' %}Set up the quiz and all its questions in one place.{% else %}Налаштуй вікторину та всі її питання в одному місці.{% endif %}</p>
+    <form method="post">
+    {% csrf_token %}
+    <div class="quiz-settings-grid">
+        {{ form.title }}
+        {{ form.description }}
+        <label class="setting-check">{{ form.is_published }} <span>{% if LANGUAGE_CODE == 'en' %}Publish quiz{% else %}Опублікувати вікторину{% endif %}</span></label>
+        <label class="setting-check">{{ form.is_private }} <span>{% if LANGUAGE_CODE == 'en' %}Private quiz with invite code{% else %}Приватна вікторина за кодом{% endif %}</span></label>
+    </div>
+    {% if form.errors %}<div class="form-errors">{{ form.errors }}</div>{% endif %}
+
+    <div class="editor-toolbar">
+        <div>
+            <h2>{% if LANGUAGE_CODE == 'en' %}Questions{% else %}Питання{% endif %}</h2>
+            <p>{% if LANGUAGE_CODE == 'en' %}Add questions and mark one correct answer for each.{% else %}Додай питання та познач одну правильну відповідь для кожного.{% endif %}</p>
+        </div>
+        <button class="secondary" type="button" id="add-question">+ {% if LANGUAGE_CODE == 'en' %}Add question{% else %}Додати питання{% endif %}</button>
+    </div>
+    {{ question_formset.management_form }}
+    <div id="question-forms" class="question-editor-list">
+        {% for question_form in question_formset %}
+            {% include 'quizzes/question_editor.html' with form=question_form index=forloop.counter %}
+        {% endfor %}
+    </div>
+    <template id="empty-question-form">
+        {% include 'quizzes/question_editor.html' with form=question_formset.empty_form index='__number__' %}
+    </template>
+    <div class="form-actions">
+        <button type="submit">{% if LANGUAGE_CODE == 'en' %}Save quiz{% else %}Зберегти вікторину{% endif %}</button>
+        <a class="back-link" href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}Cancel{% else %}Скасувати{% endif %}</a>
+        </div>
+    </form>
+</div>
+<script>
+    const addQuestionButton = document.querySelector('#add-question');
+    const questionForms = document.querySelector('#question-forms');
+    const totalForms = document.querySelector('#id_questions-TOTAL_FORMS');
+    const emptyQuestionForm = document.querySelector('#empty-question-form').innerHTML;
+    addQuestionButton.addEventListener('click', () => {
+        const formNumber = Number(totalForms.value);
+        questionForms.insertAdjacentHTML('beforeend', emptyQuestionForm.replaceAll('__number__', formNumber));
+        totalForms.value = formNumber + 1;
+    });
+</script>
+{% endblock %}

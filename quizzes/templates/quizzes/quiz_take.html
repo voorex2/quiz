@@ -1,0 +1,42 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ quiz.title }}{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Quiz mode{% else %}Режим проходження{% endif %}</p>
+        <h1>{{ quiz.title }}</h1>
+        <p>{{ quiz.description }}</p>
+    </div>
+</div>
+<div class="quiz-meta">
+    <span class="meta-pill">{{ questions|length }} {% if LANGUAGE_CODE == 'en' %}questions{% else %}питань{% endif %}</span>
+    <span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Choose one answer per question{% else %}Обери одну відповідь у кожному питанні{% endif %}</span>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="question-list">
+    {% for question in questions %}
+        <fieldset>
+            <div class="question-progress">{% if LANGUAGE_CODE == 'en' %}Question{% else %}Питання{% endif %} {{ forloop.counter }} {% if LANGUAGE_CODE == 'en' %}of{% else %}з{% endif %} {{ questions|length }}</div>
+            <legend>{{ forloop.counter }}. {{ question.text }}</legend>
+            {% if question.media_url %}
+                <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% if LANGUAGE_CODE == 'en' %}Open media{% else %}Відкрити медіа{% endif %}</a></p>
+            {% endif %}
+            {% for answer in question.answers.all %}
+                <label class="answer-option">
+                    <input type="radio" name="question_{{ question.pk }}" value="{{ answer.pk }}" required>
+                    {{ answer.text }}
+                </label>
+            {% endfor %}
+        </fieldset>
+    {% endfor %}
+    </div>
+    <div class="form-actions">
+    <button type="submit">{% if LANGUAGE_CODE == 'en' %}Finish quiz{% else %}Завершити вікторину{% endif %}</button>
+    <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Go back{% else %}Повернутися назад{% endif %}</a>
+    </div>
+</form>
+{% endblock %}

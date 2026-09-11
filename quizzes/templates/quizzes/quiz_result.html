@@ -1,0 +1,18 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% if LANGUAGE_CODE == 'en' %}Result{% else %}Результат{% endif %}{% endblock %}
+
+{% block content %}
+<div class="surface result-panel">
+    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Quiz completed{% else %}Вікторину завершено{% endif %}</p>
+    <h1>{% if LANGUAGE_CODE == 'en' %}Your result{% else %}Твій результат{% endif %}</h1>
+    <p>{% if LANGUAGE_CODE == 'en' %}Quiz:{% else %}Вікторина:{% endif %} <strong>{{ quiz.title }}</strong></p>
+    <p class="result-score">{{ result.score }} / {{ result.total }}</p>
+    <p>{% if LANGUAGE_CODE == 'en' %}Correct answers: {{ result.score }} out of {{ result.total }}.{% else %}Правильних відповідей: {{ result.score }} з {{ result.total }}.{% endif %}</p>
+    <div class="links" style="justify-content: center;">
+        <a class="button" href="{% url 'quiz_take' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Try again{% else %}Пройти ще раз{% endif %}</a>
+        <a class="button secondary" href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}Back to quizzes{% else %}До списку вікторин{% endif %}</a>
+    </div>
+</div>
+{% endblock %}
