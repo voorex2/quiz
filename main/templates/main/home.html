@@ -10,7 +10,7 @@
     <p class="hero-copy">{% if LANGUAGE_CODE == 'en' %}Create your own questions, join challenges with a code and test your knowledge with others.{% else %}Створюй власні запитання, приєднуйся до змагань за кодом та перевіряй свої знання разом з іншими.{% endif %}</p>
     <div class="links">
         {% if user.is_authenticated %}
-            <a class="button" href="#create-quiz">{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}</a>
+            <a class="button" href="{% url 'quiz_create' %}">{% if LANGUAGE_CODE == 'en' %}Create a quiz{% else %}Створити вікторину{% endif %}</a>
             <a class="button secondary" href="#join-quiz">{% if LANGUAGE_CODE == 'en' %}Join with a code{% else %}Приєднатися за кодом{% endif %}</a>
         {% else %}
             <a class="button" href="{% url 'register' %}">{% if LANGUAGE_CODE == 'en' %}Create an account{% else %}Створити акаунт{% endif %}</a>
@@ -25,20 +25,20 @@
             <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Choose your game{% else %}Обирай свою гру{% endif %}</p>
             <h2>{% if LANGUAGE_CODE == 'en' %}Quizzes for you{% else %}Вікторини для тебе{% endif %}</h2>
         </div>
-        <a class="text-link" href="#all-quizzes">{% if LANGUAGE_CODE == 'en' %}View all →{% else %}Переглянути всі →{% endif %}</a>
+        <a class="text-link" href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}View all →{% else %}Переглянути всі →{% endif %}</a>
     </div>
     <div class="quiz-grid">
         <article class="quiz-placeholder featured-placeholder">
             <span class="placeholder-number">01</span>
             <h3>{% if LANGUAGE_CODE == 'en' %}Popular quizzes{% else %}Популярні вікторини{% endif %}</h3>
             <p>{% if LANGUAGE_CODE == 'en' %}The community's most popular games will appear here.{% else %}Тут з'являться найпопулярніші ігри спільноти.{% endif %}</p>
-            <a href="#popular">{% if LANGUAGE_CODE == 'en' %}Open collection →{% else %}Відкрити добірку →{% endif %}</a>
+            <a href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}Open collection →{% else %}Відкрити добірку →{% endif %}</a>
         </article>
         <article class="quiz-placeholder">
             <span class="placeholder-number">02</span>
             <h3>{% if LANGUAGE_CODE == 'en' %}New quizzes{% else %}Нові вікторини{% endif %}</h3>
             <p>{% if LANGUAGE_CODE == 'en' %}A place for fresh quizzes from platform creators.{% else %}Місце для свіжих вікторин від авторів платформи.{% endif %}</p>
-            <a href="#new">{% if LANGUAGE_CODE == 'en' %}See what's new →{% else %}Дивитися новинки →{% endif %}</a>
+            <a href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}See what's new →{% else %}Дивитися новинки →{% endif %}</a>
         </article>
     </div>
 </section>
