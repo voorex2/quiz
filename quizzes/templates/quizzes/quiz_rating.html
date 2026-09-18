@@ -1,12 +1,12 @@
 {% extends 'login/base.html' %}
 {% load i18n %}
 
-{% block title %}{% if LANGUAGE_CODE == 'en' %}Rating{% else %}Рейтинг{% endif %}{% endblock %}
+{% block title %}{% trans 'Rating' %}{% endblock %}
 
 {% block content %}
 <div class="content-header">
     <div>
-        <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Leaderboard{% else %}Таблиця лідерів{% endif %}</p>
+        <p class="eyebrow">{% trans 'Leaderboard' %}</p>
         <h1>{{ quiz.title }}</h1>
     </div>
 </div>
@@ -16,7 +16,7 @@
     {% for attempt in attempts %}
         <article class="quiz-card">
             <span class="card-label">#{{ forloop.counter }}</span>
-            <h2>{{ attempt.user.username|default:'Guest' }}</h2>
+            <h2>{{ attempt.user.username|default:_('Guest') }}</h2>
             <p class="card-stats">{{ attempt.score }} / {{ attempt.total }} · {{ attempt.percentage }}%</p>
             <p>{{ attempt.created_at|date:'d.m.Y H:i' }}</p>
         </article>
@@ -24,8 +24,8 @@
 </div>
 {% else %}
 <div class="empty-state">
-    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}No attempts yet{% else %}Ще немає спроб{% endif %}</p>
-    <h2>{% if LANGUAGE_CODE == 'en' %}Be the first one to complete this quiz{% else %}Будь першим, хто пройде цю вікторину{% endif %}</h2>
+    <p class="eyebrow">{% trans 'No attempts yet' %}</p>
+    <h2>{% trans 'Be the first one to complete this quiz' %}</h2>
 </div>
 {% endif %}
 {% endblock %}

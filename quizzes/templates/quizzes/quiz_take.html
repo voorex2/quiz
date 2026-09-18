@@ -6,29 +6,31 @@
 {% block content %}
 <div class="content-header">
     <div>
-        <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Quiz mode{% else %}Режим проходження{% endif %}</p>
+        <p class="eyebrow">{% trans 'Quiz mode' %}</p>
         <h1>{{ quiz.title }}</h1>
         <p>{{ quiz.description }}</p>
     </div>
     <div class="surface" style="padding: 1rem 1.25rem; min-width: 180px; text-align: center;">
-        <div class="eyebrow" style="margin-bottom: .25rem;">{% if LANGUAGE_CODE == 'en' %}Time left{% else %}Час залишився{% endif %}</div>
+        <div class="eyebrow" style="margin-bottom: .25rem;">{% trans 'Time left' %}</div>
         <strong id="countdown-timer" style="font-size: 2rem;">00:00</strong>
     </div>
 </div>
 <div class="quiz-meta">
-    <span class="meta-pill">{{ questions|length }} {% if LANGUAGE_CODE == 'en' %}questions{% else %}питань{% endif %}</span>
-    <span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Choose one answer per question{% else %}Обери одну відповідь у кожному питанні{% endif %}</span>
+    <span class="meta-pill">{{ questions|length }} {% trans 'questions' %}</span>
+    <span class="meta-pill">{% trans 'Choose one answer per question' %}</span>
 </div>
 <form method="post" id="quiz-form">
     {% csrf_token %}
     <div class="question-list">
     {% for question in questions %}
-        <fieldset data-question-time="{{ question.time_limit }}">
-            <div class="question-progress">{% if LANGUAGE_CODE == 'en' %}Question{% else %}Питання{% endif %} {{ forloop.counter }} {% if LANGUAGE_CODE == 'en' %}of{% else %}з{% endif %} {{ questions|length }}</div>
-            <div style="margin-bottom: .75rem; color: var(--muted); font-family: Arial, sans-serif; font-size: .75rem;">{% if LANGUAGE_CODE == 'en' %}Time for this question{% else %}Час на це питання{% endif %}: <strong>{{ question.time_limit }}s</strong></div>
+        <fieldset class="question-card" data-question-time="{{ question.time_limit }}">
+            <div class="question-progress">{% blocktrans with question_number=forloop.counter total=questions|length %}Question {{ question_number }} of {{ total }}{% endblocktrans %}</div>
+            <div class="question-timer" data-question-time="{{ question.time_limit }}" style="margin-bottom: .75rem; color: var(--muted); font-family: Arial, sans-serif; font-size: .75rem;">
+                {% trans 'Time for this question' %}: <strong>00:{{ question.time_limit|stringformat:"02d" }}</strong>
+            </div>
             <legend>{{ forloop.counter }}. {{ question.text }}</legend>
             {% if question.media_url %}
-                <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% if LANGUAGE_CODE == 'en' %}Open media{% else %}Відкрити медіа{% endif %}</a></p>
+                <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% trans 'Open media' %}</a></p>
             {% endif %}
             {% for answer in question.answers.all %}
                 <label class="answer-option">
@@ -40,15 +42,15 @@
     {% endfor %}
     </div>
     <div class="form-actions">
-    <button type="submit">{% if LANGUAGE_CODE == 'en' %}Finish quiz{% else %}Завершити вікторину{% endif %}</button>
-    <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Go back{% else %}Повернутися назад{% endif %}</a>
+    <button type="submit">{% trans 'Finish quiz' %}</button>
+    <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% trans 'Go back' %}</a>
     </div>
 </form>
 <script>
     const quizForm = document.getElementById('quiz-form');
     const timerNode = document.getElementById('countdown-timer');
-    const timeNodes = Array.from(document.querySelectorAll('[data-question-time]'));
-    const totalSeconds = timeNodes.reduce((sum, item) => sum + Number(item.dataset.questionTime || 0), 0);
+    const questionCards = Array.from(document.querySelectorAll('.question-card'));
+    const totalSeconds = questionCards.reduce((sum, card) => sum + Number(card.dataset.questionTime || 0), 0);
     let remainingSeconds = totalSeconds;
 
     function formatTime(value) {
@@ -56,6 +58,26 @@
         const seconds = String(value % 60).padStart(2, '0');
         return `${minutes}:${seconds}`;
     }
+
+    questionCards.forEach((card) => {
+        const timerLabel = card.querySelector('.question-timer strong');
+        const inputs = card.querySelectorAll('input[type="radio"]');
+        const totalForCard = Number(card.dataset.questionTime || 0);
+        let cardSeconds = totalForCard;
+
+        const timer = setInterval(() => {
+            if (cardSeconds <= 0) {
+                clearInterval(timer);
+                timerLabel.textContent = '00:00';
+                inputs.forEach((input) => {
+                    input.disabled = true;
+                });
+                return;
+            }
+            cardSeconds -= 1;
+            timerLabel.textContent = formatTime(cardSeconds);
+        }, 1000);
+    });
 
     const countdown = setInterval(() => {
         if (remainingSeconds <= 0) {

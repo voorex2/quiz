@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.http import Http404
 from django.db.models import Count
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from .forms import QuestionEditorFormSet, QuizForm
 from .models import Answer, Question, Quiz, QuizAttempt, QuizLike
@@ -75,7 +76,7 @@ def quiz_edit_view(request, pk):
 def quiz_detail_view(request, pk):
     quiz = get_object_or_404(Quiz.objects.annotate(like_count=Count('likes')), pk=pk)
     if not quiz.is_published and quiz.owner_id != request.user.id:
-        raise Http404('Quiz not found')
+        raise Http404(_('Quiz not found'))
     can_view_private = not quiz.is_private or quiz.owner_id == request.user.id or request.session.get(f'joined_quiz_{quiz.pk}')
     if not can_view_private:
         return redirect('quiz_join')
@@ -108,7 +109,7 @@ def quiz_join_view(request):
         if quiz:
             request.session[f'joined_quiz_{quiz.pk}'] = True
             return redirect('quiz_detail', pk=quiz.pk)
-        error = 'Вікторину за таким кодом не знайдено.'
+        error = _('Quiz with this code was not found.')
     return render(request, 'quizzes/quiz_join.html', {'error': error})
 
 
