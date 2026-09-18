@@ -83,3 +83,26 @@ class QuizLike(models.Model):
 
     def __str__(self):
         return f'{self.user} likes {self.quiz}'
+
+
+class QuizAttempt(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='attempts')
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='quiz_attempts',
+        null=True,
+        blank=True,
+    )
+    score = models.PositiveIntegerField(default=0)
+    total = models.PositiveIntegerField(default=0)
+    percentage = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'Спроба вікторини'
+        verbose_name_plural = 'Спроби вікторин'
+
+    def __str__(self):
+        return f'{self.user} -> {self.quiz}: {self.score}/{self.total}'

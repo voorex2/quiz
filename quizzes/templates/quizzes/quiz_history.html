@@ -1,0 +1,32 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% if LANGUAGE_CODE == 'en' %}History{% else %}Історія результатів{% endif %}{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}Your games{% else %}Твої ігри{% endif %}</p>
+        <h1>{% if LANGUAGE_CODE == 'en' %}Results history{% else %}Історія результатів{% endif %}</h1>
+    </div>
+</div>
+
+{% if attempts %}
+<div class="quiz-card-grid">
+    {% for attempt in attempts %}
+        <article class="quiz-card">
+            <span class="card-label">{{ attempt.created_at|date:'d.m.Y H:i' }}</span>
+            <h2><a href="{% url 'quiz_detail' attempt.quiz.pk %}">{{ attempt.quiz.title }}</a></h2>
+            <p class="card-stats">{{ attempt.score }} / {{ attempt.total }} · {{ attempt.percentage }}%</p>
+            <a class="button" href="{% url 'quiz_detail' attempt.quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Open quiz{% else %}Відкрити вікторину{% endif %}</a>
+        </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p class="eyebrow">{% if LANGUAGE_CODE == 'en' %}No history yet{% else %}Ще немає результатів{% endif %}</p>
+    <h2>{% if LANGUAGE_CODE == 'en' %}Your completed games will appear here{% else %}Тут з’являться твої завершені вікторини{% endif %}</h2>
+    <a class="button" href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}Go to quizzes{% else %}До вікторин{% endif %}</a>
+</div>
+{% endif %}
+{% endblock %}

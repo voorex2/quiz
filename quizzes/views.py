@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import QuestionEditorFormSet, QuizForm
-from .models import Answer, Question, Quiz, QuizLike
+from .models import Answer, Question, Quiz, QuizAttempt, QuizLike
 
 
 def quiz_list_view(request):
@@ -18,10 +18,12 @@ def quiz_list_view(request):
     else:
         quizzes = Quiz.objects.filter(is_published=True, is_private=False)
 
-    if search_query:
-        quizzes = quizzes.filter(Q(title__icontains=search_query))
-
     quizzes = quizzes.select_related('owner').annotate(like_count=Count('likes'))
+
+    if search_query:
+        query_lower = search_query.lower()
+        quizzes = [quiz for quiz in quizzes if query_lower in quiz.title.lower()]
+
     return render(
         request,
         'quizzes/quiz_list.html',
@@ -190,10 +192,36 @@ def quiz_take_view(request, pk):
                 pk=request.POST[f'question_{question.pk}'], is_correct=True
             ).exists()
         )
-        request.session[f'quiz_result_{quiz.pk}'] = {'score': score, 'total': len(questions)}
+        total = len(questions)
+        percentage = int(round((score / total) * 100)) if total else 0
+        attempt = QuizAttempt.objects.create(
+            quiz=quiz,
+            user=request.user if request.user.is_authenticated else None,
+            score=score,
+            total=total,
+            percentage=percentage,
+        )
+        request.session[f'quiz_result_{quiz.pk}'] = {
+            'score': score,
+            'total': total,
+            'percentage': percentage,
+            'attempt_id': attempt.pk,
+        }
         return redirect('quiz_result', pk=quiz.pk)
 
     return render(request, 'quizzes/quiz_take.html', {'quiz': quiz, 'questions': questions})
+
+
+@login_required
+def quiz_history_view(request):
+    attempts = QuizAttempt.objects.filter(user=request.user).select_related('quiz').order_by('-created_at')
+    return render(request, 'quizzes/quiz_history.html', {'attempts': attempts})
+
+
+def quiz_rating_view(request, pk):
+    quiz = get_object_or_404(Quiz.objects.prefetch_related('attempts__user'), pk=pk, is_published=True)
+    attempts = quiz.attempts.select_related('user').order_by('-percentage', '-score', 'created_at')
+    return render(request, 'quizzes/quiz_rating.html', {'quiz': quiz, 'attempts': attempts})
 
 
 def quiz_result_view(request, pk):
@@ -201,4 +229,8 @@ def quiz_result_view(request, pk):
     result = request.session.pop(f'quiz_result_{quiz.pk}', None)
     if result is None:
         return redirect('quiz_detail', pk=quiz.pk)
+    if result.get('attempt_id'):
+        attempt = QuizAttempt.objects.filter(pk=result['attempt_id']).first()
+        if attempt:
+            result['percentage'] = attempt.percentage
     return render(request, 'quizzes/quiz_result.html', {'quiz': quiz, 'result': result})

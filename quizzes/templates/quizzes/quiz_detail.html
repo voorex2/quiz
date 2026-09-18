@@ -24,8 +24,13 @@
 		<button type="submit" class="like-button"{% if liked %} disabled{% endif %}>♥ {% if liked %}{% if LANGUAGE_CODE == 'en' %}Liked{% else %}Вподобано{% endif %}{% else %}{% if LANGUAGE_CODE == 'en' %}Like{% else %}Подобається{% endif %}{% endif %}</button>
 	</form>
 {% endif %}
+<div class="links">
+    {% if quiz.questions.exists %}
+        <a class="button" href="{% url 'quiz_take' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Take quiz{% else %}Пройти вікторину{% endif %}</a>
+    {% endif %}
+    <a class="button secondary" href="{% url 'quiz_rating' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Rating{% else %}Рейтинг{% endif %}</a>
+</div>
 {% if quiz.questions.exists %}
-	<a class="button" href="{% url 'quiz_take' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Take quiz{% else %}Пройти вікторину{% endif %}</a>
 {% else %}
 	<p>{% if LANGUAGE_CODE == 'en' %}This quiz has no questions yet.{% else %}У вікторині ще немає питань.{% endif %}</p>
 {% endif %}

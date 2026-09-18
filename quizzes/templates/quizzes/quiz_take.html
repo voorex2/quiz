@@ -10,17 +10,22 @@
         <h1>{{ quiz.title }}</h1>
         <p>{{ quiz.description }}</p>
     </div>
+    <div class="surface" style="padding: 1rem 1.25rem; min-width: 180px; text-align: center;">
+        <div class="eyebrow" style="margin-bottom: .25rem;">{% if LANGUAGE_CODE == 'en' %}Time left{% else %}Час залишився{% endif %}</div>
+        <strong id="countdown-timer" style="font-size: 2rem;">00:00</strong>
+    </div>
 </div>
 <div class="quiz-meta">
     <span class="meta-pill">{{ questions|length }} {% if LANGUAGE_CODE == 'en' %}questions{% else %}питань{% endif %}</span>
     <span class="meta-pill">{% if LANGUAGE_CODE == 'en' %}Choose one answer per question{% else %}Обери одну відповідь у кожному питанні{% endif %}</span>
 </div>
-<form method="post">
+<form method="post" id="quiz-form">
     {% csrf_token %}
     <div class="question-list">
     {% for question in questions %}
-        <fieldset>
+        <fieldset data-question-time="{{ question.time_limit }}">
             <div class="question-progress">{% if LANGUAGE_CODE == 'en' %}Question{% else %}Питання{% endif %} {{ forloop.counter }} {% if LANGUAGE_CODE == 'en' %}of{% else %}з{% endif %} {{ questions|length }}</div>
+            <div style="margin-bottom: .75rem; color: var(--muted); font-family: Arial, sans-serif; font-size: .75rem;">{% if LANGUAGE_CODE == 'en' %}Time for this question{% else %}Час на це питання{% endif %}: <strong>{{ question.time_limit }}s</strong></div>
             <legend>{{ forloop.counter }}. {{ question.text }}</legend>
             {% if question.media_url %}
                 <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% if LANGUAGE_CODE == 'en' %}Open media{% else %}Відкрити медіа{% endif %}</a></p>
@@ -39,4 +44,28 @@
     <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% if LANGUAGE_CODE == 'en' %}Go back{% else %}Повернутися назад{% endif %}</a>
     </div>
 </form>
+<script>
+    const quizForm = document.getElementById('quiz-form');
+    const timerNode = document.getElementById('countdown-timer');
+    const timeNodes = Array.from(document.querySelectorAll('[data-question-time]'));
+    const totalSeconds = timeNodes.reduce((sum, item) => sum + Number(item.dataset.questionTime || 0), 0);
+    let remainingSeconds = totalSeconds;
+
+    function formatTime(value) {
+        const minutes = String(Math.floor(value / 60)).padStart(2, '0');
+        const seconds = String(value % 60).padStart(2, '0');
+        return `${minutes}:${seconds}`;
+    }
+
+    const countdown = setInterval(() => {
+        if (remainingSeconds <= 0) {
+            clearInterval(countdown);
+            timerNode.textContent = '00:00';
+            quizForm.submit();
+            return;
+        }
+        remainingSeconds -= 1;
+        timerNode.textContent = formatTime(remainingSeconds);
+    }, 1000);
+</script>
 {% endblock %}

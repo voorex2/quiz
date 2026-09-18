@@ -196,6 +196,7 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'quiz_list' %}">{% if LANGUAGE_CODE == 'en' %}All quizzes{% else %}Усі вікторини{% endif %}</a>
                     <a href="{% url 'quiz_list' %}?mine=1">{% if LANGUAGE_CODE == 'en' %}My quizzes{% else %}Мої вікторини{% endif %}</a>
+                    <a href="{% url 'quiz_history' %}">{% if LANGUAGE_CODE == 'en' %}History{% else %}Історія{% endif %}</a>
                     <a href="{% url 'profile' %}">{% if LANGUAGE_CODE == 'en' %}Profile{% else %}Профіль{% endif %}</a>
                     <a class="nav-cta" href="{% url 'logout' %}">{% if LANGUAGE_CODE == 'en' %}Log out{% else %}Вийти{% endif %}</a>
                 {% else %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Answer, Question, Quiz
+from .models import Answer, Question, Quiz, QuizAttempt
 
 
 class AnswerInline(admin.TabularInline):
@@ -27,3 +27,10 @@ class QuizAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('text', 'question', 'is_correct')
     list_filter = ('is_correct',)
+
+
+@admin.register(QuizAttempt)
+class QuizAttemptAdmin(admin.ModelAdmin):
+    list_display = ('quiz', 'user', 'score', 'total', 'percentage', 'created_at')
+    list_filter = ('quiz', 'user', 'created_at')
+    search_fields = ('quiz__title', 'user__username')

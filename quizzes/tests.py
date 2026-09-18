@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from .models import Answer, Question, Quiz, QuizLike
+from .models import Answer, Question, Quiz, QuizAttempt, QuizLike
 
 
 class QuizTests(TestCase):
@@ -188,3 +188,35 @@ class QuizTests(TestCase):
         response = self.client.get(f'/quizzes/{quiz.pk}/')
 
         self.assertEqual(response.status_code, 404)
+
+    def test_user_attempt_is_saved_and_history_page_lists_it(self):
+        user = User.objects.create_user(username='player', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=user, title='Математика', is_published=True)
+        question = Question.objects.create(quiz=quiz, text='2 + 2?')
+        correct = Answer.objects.create(question=question, text='4', is_correct=True)
+        self.client.force_login(user)
+
+        response = self.client.post(
+            f'/quizzes/{quiz.pk}/take/',
+            {f'question_{question.pk}': correct.pk},
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(QuizAttempt.objects.filter(user=user, quiz=quiz).exists())
+        history_response = self.client.get('/quizzes/history/')
+        self.assertContains(history_response, 'Математика')
+
+    def test_quiz_rating_shows_best_results(self):
+        owner = User.objects.create_user(username='owner', password='StrongPassword123!')
+        first = User.objects.create_user(username='first', password='StrongPassword123!')
+        second = User.objects.create_user(username='second', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Рейтинг', is_published=True)
+        question = Question.objects.create(quiz=quiz, text='2 + 2?')
+        Answer.objects.create(question=question, text='4', is_correct=True)
+        QuizAttempt.objects.create(quiz=quiz, user=first, score=1, total=1, percentage=100)
+        QuizAttempt.objects.create(quiz=quiz, user=second, score=0, total=1, percentage=0)
+
+        response = self.client.get(f'/quizzes/{quiz.pk}/rating/')
+
+        self.assertContains(response, 'first')
+        self.assertContains(response, '100%')
