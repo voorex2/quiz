@@ -1,0 +1,415 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 19:52+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Username"
+msgstr "Ім'я користувача"
+
+msgid "Email address"
+msgstr "Електронна пошта"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password confirmation"
+msgstr "Підтвердження пароля"
+
+msgid "Up to 150 characters. Letters, digits and @/./+/-/_ only."
+msgstr "До 150 символів. Тільки літери, цифри та @/./+/-/_ ."
+
+msgid "Your password must contain at least 8 characters and not be too simple."
+msgstr ""
+"Ваш пароль має містити щонайменше 8 символів і не бути занадто простим."
+
+msgid "Enter the same password again for verification."
+msgstr "Введіть той самий пароль ще раз для перевірки."
+
+msgid "Current password"
+msgstr "Поточний пароль"
+
+msgid "New password"
+msgstr "Новий пароль"
+
+msgid "New password confirmation"
+msgstr "Підтвердження нового пароля"
+
+msgid "Enter the new password again for verification."
+msgstr "Введіть новий пароль ще раз для перевірки."
+
+msgid "Online quiz"
+msgstr "Онлайн-вікторина"
+
+#, fuzzy
+#| msgid "Quizzes"
+msgid "Quizzer"
+msgstr "Вікторини"
+
+msgid "Main navigation"
+msgstr ""
+
+msgid "Home"
+msgstr "Домівка"
+
+msgid "All quizzes"
+msgstr "Усі вікторини"
+
+msgid "My quizzes"
+msgstr "Мої вікторини"
+
+msgid "History"
+msgstr "Історія"
+
+msgid "Profile"
+msgstr "Профіль"
+
+msgid "Log out"
+msgstr "Вийти"
+
+msgid "Log in"
+msgstr "Увійти"
+
+msgid "Language"
+msgstr ""
+
+msgid "Online quiz · a space for curious challenges"
+msgstr "Онлайн-вікторина · простір для цікавих викликів"
+
+msgid "Create an account"
+msgstr "Створити акаунт"
+
+msgid "You are logged in as"
+msgstr "Ви увійшли як"
+
+msgid "Email:"
+msgstr "Електронна пошта:"
+
+msgid "not specified"
+msgstr "не вказано"
+
+msgid "Change username"
+msgstr "Змінити ім'я користувача"
+
+msgid "Save username"
+msgstr "Зберегти ім'я користувача"
+
+msgid "Change password"
+msgstr "Змінити пароль"
+
+msgid "Registration"
+msgstr "Реєстрація"
+
+msgid "Register"
+msgstr "Зареєструватися"
+
+msgid "Already have an account"
+msgstr "Вже маєте акаунт"
+
+msgid "Learn · play · win"
+msgstr "Навчайся · грай · перемагай"
+
+msgid "Your next great quiz starts here."
+msgstr "Твоя наступна велика вікторина починається тут."
+
+msgid ""
+"Create your own questions, join challenges with a code and test your "
+"knowledge with others."
+msgstr ""
+"Створюй власні запитання, приєднуйся до викликів за кодом і перевіряй свої "
+"знання разом з іншими."
+
+msgid "Create a quiz"
+msgstr "Створити вікторину"
+
+msgid "Join with a code"
+msgstr "Приєднатися за кодом"
+
+msgid "Quizzes"
+msgstr "Вікторини"
+
+msgid "Choose your game"
+msgstr "Обери гру"
+
+msgid "Quizzes for you"
+msgstr "Вікторини для тебе"
+
+msgid "View all →"
+msgstr "Переглянути всі →"
+
+msgid "Popular quizzes"
+msgstr "Популярні вікторини"
+
+msgid "No popular quizzes yet."
+msgstr "Поки немає популярних вікторин."
+
+msgid "Open collection →"
+msgstr "Відкрити колекцію →"
+
+msgid "New quizzes"
+msgstr "Нові вікторини"
+
+msgid "No new quizzes yet."
+msgstr "Поки немає нових вікторин."
+
+msgid "See what's new →"
+msgstr "Дивитися новинки →"
+
+msgid "Quick start"
+msgstr "Швидкий старт"
+
+msgid "Have an invitation code?"
+msgstr "Маєте код запрошення?"
+
+msgid "The quiz join form will appear here."
+msgstr "Форма приєднання до вікторини з'явиться тут."
+
+msgid "Join"
+msgstr "Приєднатися"
+
+msgid "Question"
+msgstr ""
+
+msgid "One question, four answer slots, one correct choice."
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Answers"
+msgstr ""
+
+msgid "Select the correct one"
+msgstr ""
+
+msgid "Add a question"
+msgstr ""
+
+msgid "Write a question, set the time limit and mark the correct answer."
+msgstr ""
+
+msgid "Answer options"
+msgstr ""
+
+msgid "Add at least two options and mark the correct one."
+msgstr ""
+
+msgid "Save question"
+msgstr ""
+
+msgid "Back to quiz"
+msgstr ""
+
+msgid "Quiz"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "questions"
+msgstr ""
+
+msgid "Private"
+msgstr ""
+
+msgid "Invite code"
+msgstr ""
+
+msgid "Liked"
+msgstr ""
+
+msgid "Like"
+msgstr ""
+
+msgid "Take quiz"
+msgstr ""
+
+msgid "Rating"
+msgstr ""
+
+msgid "This quiz has no questions yet."
+msgstr ""
+
+msgid "Edit quiz"
+msgstr ""
+
+msgid "Delete this quiz permanently?"
+msgstr ""
+
+msgid "Delete quiz"
+msgstr ""
+
+msgid "Quiz editor"
+msgstr ""
+
+msgid "New project"
+msgstr ""
+
+msgid "Set up the quiz and all its questions in one place."
+msgstr ""
+
+msgid "Publish quiz"
+msgstr ""
+
+msgid "Private quiz with invite code"
+msgstr ""
+
+msgid "Questions"
+msgstr ""
+
+msgid "Add questions and mark one correct answer for each."
+msgstr ""
+
+msgid "Add question"
+msgstr ""
+
+msgid "Save quiz"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Your games"
+msgstr ""
+
+msgid "Results history"
+msgstr ""
+
+msgid "Open quiz"
+msgstr ""
+
+msgid "No history yet"
+msgstr ""
+
+msgid "Your completed games will appear here"
+msgstr ""
+
+msgid "Go to quizzes"
+msgstr ""
+
+msgid "Join a private quiz"
+msgstr ""
+
+msgid "Invite only"
+msgstr ""
+
+msgid "Enter the code shared by the quiz author."
+msgstr ""
+
+msgid "Join quiz"
+msgstr ""
+
+msgid "Back home"
+msgstr ""
+
+msgid "Your drafts, private and published quizzes."
+msgstr ""
+
+msgid "Choose a topic and test your knowledge."
+msgstr ""
+
+msgid "Search by quiz title"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Check your knowledge in this quiz."
+msgstr ""
+
+msgid "View →"
+msgstr ""
+
+msgid "Nothing here yet"
+msgstr ""
+
+msgid "No published quizzes yet"
+msgstr ""
+
+msgid "Create the first quiz and share it with others."
+msgstr ""
+
+msgid "Create the first quiz"
+msgstr ""
+
+msgid "Leaderboard"
+msgstr ""
+
+msgid "Guest"
+msgstr ""
+
+msgid "No attempts yet"
+msgstr ""
+
+msgid "Be the first one to complete this quiz"
+msgstr ""
+
+msgid "Result"
+msgstr ""
+
+msgid "Quiz completed"
+msgstr ""
+
+msgid "Your result"
+msgstr ""
+
+msgid "Quiz:"
+msgstr ""
+
+#, python-format
+msgid "Correct answers: %(score)s out of %(total)s."
+msgstr ""
+
+msgid "Try again"
+msgstr ""
+
+msgid "Back to quizzes"
+msgstr ""
+
+msgid "Quiz mode"
+msgstr ""
+
+msgid "Time left"
+msgstr ""
+
+msgid "Choose one answer per question"
+msgstr ""
+
+#, python-format
+msgid "Question %(question_number)s of %(total)s"
+msgstr ""
+
+msgid "Time for this question"
+msgstr ""
+
+msgid "Open media"
+msgstr ""
+
+msgid "Finish quiz"
+msgstr ""
+
+msgid "Go back"
+msgstr ""
+
+msgid "Quiz not found"
+msgstr ""
+
+msgid "Quiz with this code was not found."
+msgstr ""

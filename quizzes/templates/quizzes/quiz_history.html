@@ -1,0 +1,32 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'History' %}{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <p class="eyebrow">{% trans 'Your games' %}</p>
+        <h1>{% trans 'Results history' %}</h1>
+    </div>
+</div>
+
+{% if attempts %}
+<div class="quiz-card-grid">
+    {% for attempt in attempts %}
+        <article class="quiz-card">
+            <span class="card-label">{{ attempt.created_at|date:'d.m.Y H:i' }}</span>
+            <h2><a href="{% url 'quiz_detail' attempt.quiz.pk %}">{{ attempt.quiz.title }}</a></h2>
+            <p class="card-stats">{{ attempt.score }} / {{ attempt.total }} · {{ attempt.percentage }}%</p>
+            <a class="button" href="{% url 'quiz_detail' attempt.quiz.pk %}">{% trans 'Open quiz' %}</a>
+        </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p class="eyebrow">{% trans 'No history yet' %}</p>
+    <h2>{% trans 'Your completed games will appear here' %}</h2>
+    <a class="button" href="{% url 'quiz_list' %}">{% trans 'Go to quizzes' %}</a>
+</div>
+{% endif %}
+{% endblock %}

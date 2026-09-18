@@ -2,10 +2,10 @@
     <div class="question-editor-heading">
         <span class="question-number">{{ index }}</span>
         <div>
-            <h3>{% if LANGUAGE_CODE == 'en' %}Question{% else %}Питання{% endif %} {{ index }}</h3>
-            <p>{% if LANGUAGE_CODE == 'en' %}One question, four answer slots, one correct choice.{% else %}Одне питання, чотири варіанти та одна правильна відповідь.{% endif %}</p>
+            <h3>{% blocktrans %}Question{% endblocktrans %} {{ index }}</h3>
+            <p>{% trans 'One question, four answer slots, one correct choice.' %}</p>
         </div>
-        <label class="remove-question">{{ form.DELETE }} {% if LANGUAGE_CODE == 'en' %}Remove{% else %}Видалити{% endif %}</label>
+        <label class="remove-question">{{ form.DELETE }} {% trans 'Remove' %}</label>
     </div>
     {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
     <div class="question-main-fields">
@@ -17,8 +17,8 @@
     {% if form.errors %}<div class="form-errors">{{ form.errors }}</div>{% endif %}
     <div class="answer-editor">
         <div class="answer-editor-title">
-            <strong>{% if LANGUAGE_CODE == 'en' %}Answers{% else %}Варіанти відповідей{% endif %}</strong>
-            <span>{% if LANGUAGE_CODE == 'en' %}Select the correct one{% else %}Обери правильний{% endif %}</span>
+            <strong>{% trans 'Answers' %}</strong>
+            <span>{% trans 'Select the correct one' %}</span>
         </div>
         <div class="answer-grid">
             <label class="answer-input">{{ form.answer_1.label_tag }}{{ form.answer_1 }}</label>

@@ -1,30 +1,29 @@
 {% extends 'login/base.html' %}
 {% load i18n %}
 
-{% get_current_language as LANGUAGE_CODE %}
-{% block title %}{% if LANGUAGE_CODE == 'en' %}Profile{% else %}Профіль{% endif %}{% endblock %}
+{% block title %}{% trans 'Profile' %}{% endblock %}
 
 {% block content %}
-<h1>{% if LANGUAGE_CODE == 'en' %}Profile{% else %}Профіль{% endif %}</h1>
-<p>{% if LANGUAGE_CODE == 'en' %}You are logged in as{% else %}Ви увійшли як{% endif %} <strong>{{ user.username }}</strong>.</p>
-<p>{% if LANGUAGE_CODE == 'en' %}Email:{% else %}Електронна пошта:{% endif %} {% if user.email %}{{ user.email }}{% elif LANGUAGE_CODE == 'en' %}not specified{% else %}не вказано{% endif %}</p>
+<h1>{% trans 'Profile' %}</h1>
+<p>{% blocktrans %}You are logged in as{% endblocktrans %} <strong>{{ user.username }}</strong>.</p>
+<p>{% trans 'Email:' %} {% if user.email %}{{ user.email }}{% else %}{% trans 'not specified' %}{% endif %}</p>
 <section class="profile-form">
-    <h2>{% if LANGUAGE_CODE == 'en' %}Change username{% else %}Змінити нікнейм{% endif %}</h2>
+    <h2>{% trans 'Change username' %}</h2>
     <form method="post" action="{% url 'change_username' %}">
         {% csrf_token %}
         {{ username_form.as_p }}
-        <button type="submit">{% if LANGUAGE_CODE == 'en' %}Save username{% else %}Зберегти нікнейм{% endif %}</button>
+        <button type="submit">{% trans 'Save username' %}</button>
     </form>
 </section>
 <section class="profile-form">
-    <h2>{% if LANGUAGE_CODE == 'en' %}Change password{% else %}Змінити пароль{% endif %}</h2>
+    <h2>{% trans 'Change password' %}</h2>
     <form method="post" action="{% url 'change_password' %}">
         {% csrf_token %}
         {{ password_form.as_p }}
-        <button type="submit">{% if LANGUAGE_CODE == 'en' %}Change password{% else %}Змінити пароль{% endif %}</button>
+        <button type="submit">{% trans 'Change password' %}</button>
     </form>
 </section>
 <div class="links">
-    <a class="button secondary" href="{% url 'logout' %}">{% if LANGUAGE_CODE == 'en' %}Log out{% else %}Вийти{% endif %}</a>
+    <a class="button secondary" href="{% url 'logout' %}">{% trans 'Log out' %}</a>
 </div>
 {% endblock %}

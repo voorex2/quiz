@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.http import Http404
 from django.db.models import Count
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from .forms import QuestionEditorFormSet, QuizForm
-from .models import Answer, Question, Quiz, QuizLike
+from .models import Answer, Question, Quiz, QuizAttempt, QuizLike
 
 
 def quiz_list_view(request):
@@ -18,10 +19,12 @@ def quiz_list_view(request):
     else:
         quizzes = Quiz.objects.filter(is_published=True, is_private=False)
 
-    if search_query:
-        quizzes = quizzes.filter(Q(title__icontains=search_query))
-
     quizzes = quizzes.select_related('owner').annotate(like_count=Count('likes'))
+
+    if search_query:
+        query_lower = search_query.lower()
+        quizzes = [quiz for quiz in quizzes if query_lower in quiz.title.lower()]
+
     return render(
         request,
         'quizzes/quiz_list.html',
@@ -73,7 +76,7 @@ def quiz_edit_view(request, pk):
 def quiz_detail_view(request, pk):
     quiz = get_object_or_404(Quiz.objects.annotate(like_count=Count('likes')), pk=pk)
     if not quiz.is_published and quiz.owner_id != request.user.id:
-        raise Http404('Quiz not found')
+        raise Http404(_('Quiz not found'))
     can_view_private = not quiz.is_private or quiz.owner_id == request.user.id or request.session.get(f'joined_quiz_{quiz.pk}')
     if not can_view_private:
         return redirect('quiz_join')
@@ -106,7 +109,7 @@ def quiz_join_view(request):
         if quiz:
             request.session[f'joined_quiz_{quiz.pk}'] = True
             return redirect('quiz_detail', pk=quiz.pk)
-        error = 'Вікторину за таким кодом не знайдено.'
+        error = _('Quiz with this code was not found.')
     return render(request, 'quizzes/quiz_join.html', {'error': error})
 
 
@@ -190,10 +193,36 @@ def quiz_take_view(request, pk):
                 pk=request.POST[f'question_{question.pk}'], is_correct=True
             ).exists()
         )
-        request.session[f'quiz_result_{quiz.pk}'] = {'score': score, 'total': len(questions)}
+        total = len(questions)
+        percentage = int(round((score / total) * 100)) if total else 0
+        attempt = QuizAttempt.objects.create(
+            quiz=quiz,
+            user=request.user if request.user.is_authenticated else None,
+            score=score,
+            total=total,
+            percentage=percentage,
+        )
+        request.session[f'quiz_result_{quiz.pk}'] = {
+            'score': score,
+            'total': total,
+            'percentage': percentage,
+            'attempt_id': attempt.pk,
+        }
         return redirect('quiz_result', pk=quiz.pk)
 
     return render(request, 'quizzes/quiz_take.html', {'quiz': quiz, 'questions': questions})
+
+
+@login_required
+def quiz_history_view(request):
+    attempts = QuizAttempt.objects.filter(user=request.user).select_related('quiz').order_by('-created_at')
+    return render(request, 'quizzes/quiz_history.html', {'attempts': attempts})
+
+
+def quiz_rating_view(request, pk):
+    quiz = get_object_or_404(Quiz.objects.prefetch_related('attempts__user'), pk=pk, is_published=True)
+    attempts = quiz.attempts.select_related('user').order_by('-percentage', '-score', 'created_at')
+    return render(request, 'quizzes/quiz_rating.html', {'quiz': quiz, 'attempts': attempts})
 
 
 def quiz_result_view(request, pk):
@@ -201,4 +230,8 @@ def quiz_result_view(request, pk):
     result = request.session.pop(f'quiz_result_{quiz.pk}', None)
     if result is None:
         return redirect('quiz_detail', pk=quiz.pk)
+    if result.get('attempt_id'):
+        attempt = QuizAttempt.objects.filter(pk=result['attempt_id']).first()
+        if attempt:
+            result['percentage'] = attempt.percentage
     return render(request, 'quizzes/quiz_result.html', {'quiz': quiz, 'result': result})
