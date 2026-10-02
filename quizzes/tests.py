@@ -1,10 +1,32 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils.translation import override
 
+from .forms import QuestionEditorForm
 from .models import Answer, Question, Quiz, QuizAttempt, QuizLike
 
 
 class QuizTests(TestCase):
+    def test_question_editor_validation_uses_selected_language(self):
+        form_data = {
+            'text': 'Question text',
+            'question_type': '',
+            'time_limit': 30,
+            'answer_1': 'First answer',
+            'answer_2': 'Second answer',
+            'correct_answer': '1',
+        }
+
+        with override('en'):
+            form = QuestionEditorForm(form_data)
+            self.assertFalse(form.is_valid())
+            self.assertIn('Choose a question type.', form.non_field_errors())
+
+        with override('uk'):
+            form = QuestionEditorForm(form_data)
+            self.assertFalse(form.is_valid())
+            self.assertIn('Оберіть тип запитання.', form.non_field_errors())
+
     def test_published_quiz_is_shown_in_list(self):
         user = User.objects.create_user(username='author', password='StrongPassword123!')
         Quiz.objects.create(owner=user, title='Загальна вікторина', is_published=True)
@@ -117,6 +139,21 @@ class QuizTests(TestCase):
         self.assertEqual(response['Location'], f'/quizzes/{quiz.pk}/result/')
         result_response = self.client.get(f'/quizzes/{quiz.pk}/result/')
         self.assertContains(result_response, '1 / 1')
+
+    def test_quiz_take_page_has_a_timer_for_each_sequential_question(self):
+        owner = User.objects.create_user(username='author', password='StrongPassword123!')
+        quiz = Quiz.objects.create(owner=owner, title='Timed quiz', is_published=True)
+        first = Question.objects.create(quiz=quiz, text='First?', time_limit=7)
+        second = Question.objects.create(quiz=quiz, text='Second?', time_limit=11, order=1)
+        Answer.objects.create(question=first, text='A')
+        Answer.objects.create(question=second, text='B')
+
+        response = self.client.get(f'/quizzes/{quiz.pk}/take/')
+
+        self.assertContains(response, 'id="next-question"')
+        self.assertContains(response, 'data-question-time="7"')
+        self.assertContains(response, 'data-question-time="11" hidden')
+        self.assertContains(response, 'function showQuestion(index)')
 
     def test_only_owner_can_add_question(self):
         owner = User.objects.create_user(username='owner', password='StrongPassword123!')

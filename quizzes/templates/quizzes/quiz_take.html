@@ -19,22 +19,22 @@
     <span class="meta-pill">{{ questions|length }} {% trans 'questions' %}</span>
     <span class="meta-pill">{% trans 'Choose one answer per question' %}</span>
 </div>
+<style>
+    .question-card[hidden], #quiz-form [hidden] { display: none; }
+</style>
 <form method="post" id="quiz-form">
     {% csrf_token %}
     <div class="question-list">
     {% for question in questions %}
-        <fieldset class="question-card" data-question-time="{{ question.time_limit }}">
+        <fieldset class="question-card" data-question-time="{{ question.time_limit }}"{% if not forloop.first %} hidden{% endif %}>
             <div class="question-progress">{% blocktrans with question_number=forloop.counter total=questions|length %}Question {{ question_number }} of {{ total }}{% endblocktrans %}</div>
-            <div class="question-timer" data-question-time="{{ question.time_limit }}" style="margin-bottom: .75rem; color: var(--muted); font-family: Arial, sans-serif; font-size: .75rem;">
-                {% trans 'Time for this question' %}: <strong>00:{{ question.time_limit|stringformat:"02d" }}</strong>
-            </div>
             <legend>{{ forloop.counter }}. {{ question.text }}</legend>
             {% if question.media_url %}
                 <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% trans 'Open media' %}</a></p>
             {% endif %}
             {% for answer in question.answers.all %}
                 <label class="answer-option">
-                    <input type="radio" name="question_{{ question.pk }}" value="{{ answer.pk }}" required>
+                    <input type="radio" name="question_{{ question.pk }}" value="{{ answer.pk }}">
                     {{ answer.text }}
                 </label>
             {% endfor %}
@@ -42,16 +42,19 @@
     {% endfor %}
     </div>
     <div class="form-actions">
-    <button type="submit">{% trans 'Finish quiz' %}</button>
-    <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% trans 'Go back' %}</a>
+        <button type="button" id="next-question">{% trans 'Next question' %} →</button>
+        <button type="submit" id="finish-quiz" hidden>{% trans 'Finish quiz' %}</button>
+        <a class="back-link" href="{% url 'quiz_detail' quiz.pk %}">{% trans 'Go back' %}</a>
     </div>
 </form>
 <script>
     const quizForm = document.getElementById('quiz-form');
     const timerNode = document.getElementById('countdown-timer');
     const questionCards = Array.from(document.querySelectorAll('.question-card'));
-    const totalSeconds = questionCards.reduce((sum, card) => sum + Number(card.dataset.questionTime || 0), 0);
-    let remainingSeconds = totalSeconds;
+    const nextButton = document.getElementById('next-question');
+    const finishButton = document.getElementById('finish-quiz');
+    let activeQuestion = 0;
+    let countdown;
 
     function formatTime(value) {
         const minutes = String(Math.floor(value / 60)).padStart(2, '0');
@@ -59,35 +62,47 @@
         return `${minutes}:${seconds}`;
     }
 
-    questionCards.forEach((card) => {
-        const timerLabel = card.querySelector('.question-timer strong');
-        const inputs = card.querySelectorAll('input[type="radio"]');
-        const totalForCard = Number(card.dataset.questionTime || 0);
-        let cardSeconds = totalForCard;
+    function showQuestion(index) {
+        if (countdown) {
+            clearInterval(countdown);
+        }
 
-        const timer = setInterval(() => {
-            if (cardSeconds <= 0) {
-                clearInterval(timer);
-                timerLabel.textContent = '00:00';
-                inputs.forEach((input) => {
-                    input.disabled = true;
-                });
-                return;
+        activeQuestion = index;
+        questionCards.forEach((card, cardIndex) => {
+            card.hidden = cardIndex !== activeQuestion;
+        });
+
+        const isLastQuestion = activeQuestion === questionCards.length - 1;
+        nextButton.hidden = isLastQuestion;
+        finishButton.hidden = !isLastQuestion;
+
+        let remainingSeconds = Number(questionCards[activeQuestion].dataset.questionTime || 0);
+        timerNode.textContent = formatTime(remainingSeconds);
+
+        countdown = setInterval(() => {
+            remainingSeconds -= 1;
+            timerNode.textContent = formatTime(Math.max(remainingSeconds, 0));
+
+            if (remainingSeconds <= 0) {
+                clearInterval(countdown);
+                if (isLastQuestion) {
+                    quizForm.requestSubmit(finishButton);
+                } else {
+                    showQuestion(activeQuestion + 1);
+                }
             }
-            cardSeconds -= 1;
-            timerLabel.textContent = formatTime(cardSeconds);
         }, 1000);
+    }
+
+    nextButton.addEventListener('click', () => {
+        showQuestion(activeQuestion + 1);
     });
 
-    const countdown = setInterval(() => {
-        if (remainingSeconds <= 0) {
-            clearInterval(countdown);
-            timerNode.textContent = '00:00';
-            quizForm.submit();
-            return;
-        }
-        remainingSeconds -= 1;
-        timerNode.textContent = formatTime(remainingSeconds);
-    }, 1000);
+    if (questionCards.length) {
+        showQuestion(0);
+    } else {
+        nextButton.hidden = true;
+        finishButton.hidden = false;
+    }
 </script>
 {% endblock %}

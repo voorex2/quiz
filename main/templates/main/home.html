@@ -49,7 +49,7 @@
     <div>
         <p class="eyebrow">{% trans 'Quick start' %}</p>
         <h2>{% trans 'Have an invitation code?' %}</h2>
-        <p>{% trans 'The quiz join form will appear here.' %}</p>
+        <p>{% trans 'Enter the invite code to join a private quiz.' %}</p>
     </div>
     <form class="invite-form" method="post" action="{% url 'quiz_join' %}">
         {% csrf_token %}

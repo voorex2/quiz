@@ -3,16 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 19:52+0300\n"
+"POT-Creation-Date: 2026-10-02 17:24+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,13 +57,11 @@ msgstr "Введіть новий пароль ще раз для перевір
 msgid "Online quiz"
 msgstr "Онлайн-вікторина"
 
-#, fuzzy
-#| msgid "Quizzes"
 msgid "Quizzer"
-msgstr "Вікторини"
+msgstr "Квізер"
 
 msgid "Main navigation"
-msgstr ""
+msgstr "Основна навігація"
 
 msgid "Home"
 msgstr "Домівка"
@@ -88,7 +85,7 @@ msgid "Log in"
 msgstr "Увійти"
 
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 msgid "Online quiz · a space for curious challenges"
 msgstr "Онлайн-вікторина · простір для цікавих викликів"
@@ -178,238 +175,324 @@ msgstr "Швидкий старт"
 msgid "Have an invitation code?"
 msgstr "Маєте код запрошення?"
 
-msgid "The quiz join form will appear here."
-msgstr "Форма приєднання до вікторини з'явиться тут."
+msgid "Enter the invite code to join a private quiz."
+msgstr "Введіть код запрошення, щоб приєднатися до приватної вікторини."
 
 msgid "Join"
 msgstr "Приєднатися"
 
+msgid "Quiz title"
+msgstr "Назва вікторини"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Publish quiz"
+msgstr "Опублікувати вікторину"
+
+msgid "Private quiz with invite code"
+msgstr "Приватна вікторина з кодом запрошення"
+
+msgid "Question text"
+msgstr "Текст запитання"
+
+msgid "Question type"
+msgstr "Тип запитання"
+
+msgid "Image or video URL"
+msgstr "Посилання на зображення або відео"
+
+msgid "Time limit (seconds)"
+msgstr "Обмеження часу (секунди)"
+
+msgid "Question order"
+msgstr "Порядок запитання"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Image"
+msgstr "Зображення"
+
+msgid "Video"
+msgstr "Відео"
+
+msgid "Answer option"
+msgstr "Варіант відповіді"
+
+msgid "Correct answer"
+msgstr "Правильна відповідь"
+
+msgid "Answer 1"
+msgstr "Відповідь 1"
+
+msgid "Answer 2"
+msgstr "Відповідь 2"
+
+msgid "Answer 3"
+msgstr "Відповідь 3"
+
+msgid "Answer 4"
+msgstr "Відповідь 4"
+
+msgid "Remove question"
+msgstr "Видалити запитання"
+
+msgid "Choose a question type."
+msgstr "Оберіть тип запитання."
+
+msgid "Enter a time limit."
+msgstr "Вкажіть обмеження часу."
+
+msgid "Add at least two answer options."
+msgstr "Додайте щонайменше два варіанти відповіді."
+
+msgid "Enter the question text."
+msgstr "Введіть текст запитання."
+
+msgid "Select the correct answer."
+msgstr "Оберіть правильну відповідь."
+
+msgid "The correct answer cannot be empty."
+msgstr "Поле правильної відповіді не може бути порожнім."
+
+msgid "Quiz"
+msgstr "Вікторина"
+
+msgid "Time in seconds"
+msgstr "Час у секундах"
+
+msgid "Quiz attempt"
+msgstr "Спроба вікторини"
+
+msgid "Quiz attempts"
+msgstr "Спроби вікторин"
+
 msgid "Question"
-msgstr ""
+msgstr "Запитання"
 
 msgid "One question, four answer slots, one correct choice."
-msgstr ""
+msgstr "Одне запитання, чотири варіанти відповіді, один правильний."
 
 msgid "Remove"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Answers"
-msgstr ""
+msgstr "Відповіді"
 
 msgid "Select the correct one"
-msgstr ""
+msgstr "Оберіть правильну"
 
 msgid "Add a question"
-msgstr ""
+msgstr "Додати запитання"
 
 msgid "Write a question, set the time limit and mark the correct answer."
 msgstr ""
+"Напишіть запитання, встановіть обмеження часу та позначте правильну "
+"відповідь."
 
 msgid "Answer options"
-msgstr ""
+msgstr "Варіанти відповідей"
 
 msgid "Add at least two options and mark the correct one."
-msgstr ""
+msgstr "Додайте щонайменше два варіанти та позначте правильний."
 
 msgid "Save question"
-msgstr ""
+msgstr "Зберегти запитання"
 
 msgid "Back to quiz"
-msgstr ""
-
-msgid "Quiz"
-msgstr ""
+msgstr "Повернутися до вікторини"
 
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 msgid "questions"
-msgstr ""
+msgstr "запитань"
 
 msgid "Private"
-msgstr ""
+msgstr "Приватна"
 
 msgid "Invite code"
-msgstr ""
+msgstr "Код запрошення"
 
 msgid "Liked"
-msgstr ""
+msgstr "Вподобано"
 
 msgid "Like"
-msgstr ""
+msgstr "Подобається"
 
 msgid "Take quiz"
-msgstr ""
+msgstr "Пройти вікторину"
 
 msgid "Rating"
-msgstr ""
+msgstr "Рейтинг"
 
 msgid "This quiz has no questions yet."
-msgstr ""
+msgstr "У цій вікторині поки немає запитань."
 
 msgid "Edit quiz"
-msgstr ""
+msgstr "Редагувати вікторину"
 
 msgid "Delete this quiz permanently?"
-msgstr ""
+msgstr "Видалити цю вікторину назавжди?"
 
 msgid "Delete quiz"
-msgstr ""
+msgstr "Видалити вікторину"
 
 msgid "Quiz editor"
-msgstr ""
+msgstr "Редактор вікторини"
 
 msgid "New project"
-msgstr ""
+msgstr "Нова вікторина"
 
 msgid "Set up the quiz and all its questions in one place."
-msgstr ""
-
-msgid "Publish quiz"
-msgstr ""
-
-msgid "Private quiz with invite code"
-msgstr ""
+msgstr "Налаштуйте вікторину та всі її запитання в одному місці."
 
 msgid "Questions"
-msgstr ""
+msgstr "Запитання"
 
 msgid "Add questions and mark one correct answer for each."
-msgstr ""
+msgstr "Додайте запитання та позначте одну правильну відповідь для кожного."
 
 msgid "Add question"
-msgstr ""
+msgstr "Додати запитання"
 
 msgid "Save quiz"
-msgstr ""
+msgstr "Зберегти вікторину"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 msgid "Your games"
-msgstr ""
+msgstr "Ваші ігри"
 
 msgid "Results history"
-msgstr ""
+msgstr "Історія результатів"
 
 msgid "Open quiz"
-msgstr ""
+msgstr "Відкрити вікторину"
 
 msgid "No history yet"
-msgstr ""
+msgstr "Історія поки порожня"
 
 msgid "Your completed games will appear here"
-msgstr ""
+msgstr "Тут з'являтимуться пройдені вами вікторини"
 
 msgid "Go to quizzes"
-msgstr ""
+msgstr "До вікторин"
 
 msgid "Join a private quiz"
-msgstr ""
+msgstr "Приєднатися до приватної вікторини"
 
 msgid "Invite only"
-msgstr ""
+msgstr "Лише за запрошенням"
 
 msgid "Enter the code shared by the quiz author."
-msgstr ""
+msgstr "Введіть код, яким поділився автор вікторини."
 
 msgid "Join quiz"
-msgstr ""
+msgstr "Приєднатися до вікторини"
 
 msgid "Back home"
-msgstr ""
+msgstr "На головну"
 
 msgid "Your drafts, private and published quizzes."
-msgstr ""
+msgstr "Ваші чернетки, приватні та опубліковані вікторини."
 
 msgid "Choose a topic and test your knowledge."
-msgstr ""
+msgstr "Оберіть тему та перевірте свої знання."
 
 msgid "Search by quiz title"
-msgstr ""
+msgstr "Пошук за назвою вікторини"
 
 msgid "Search"
-msgstr ""
+msgstr "Шукати"
 
 msgid "Check your knowledge in this quiz."
-msgstr ""
+msgstr "Перевірте свої знання в цій вікторині."
 
 msgid "View →"
-msgstr ""
+msgstr "Переглянути →"
 
 msgid "Nothing here yet"
-msgstr ""
+msgstr "Тут поки порожньо"
 
 msgid "No published quizzes yet"
-msgstr ""
+msgstr "Опублікованих вікторин поки немає"
 
 msgid "Create the first quiz and share it with others."
-msgstr ""
+msgstr "Створіть першу вікторину та поділіться нею з іншими."
 
 msgid "Create the first quiz"
-msgstr ""
+msgstr "Створити першу вікторину"
 
 msgid "Leaderboard"
-msgstr ""
+msgstr "Таблиця лідерів"
 
 msgid "Guest"
-msgstr ""
+msgstr "Гість"
 
 msgid "No attempts yet"
-msgstr ""
+msgstr "Спроб поки немає"
 
 msgid "Be the first one to complete this quiz"
-msgstr ""
+msgstr "Пройдіть цю вікторину першим"
 
 msgid "Result"
-msgstr ""
+msgstr "Результат"
 
 msgid "Quiz completed"
-msgstr ""
+msgstr "Вікторину завершено"
 
 msgid "Your result"
-msgstr ""
+msgstr "Ваш результат"
 
 msgid "Quiz:"
-msgstr ""
+msgstr "Вікторина:"
 
 #, python-format
 msgid "Correct answers: %(score)s out of %(total)s."
-msgstr ""
+msgstr "Правильних відповідей: %(score)s із %(total)s."
 
 msgid "Try again"
-msgstr ""
+msgstr "Спробувати ще раз"
 
 msgid "Back to quizzes"
-msgstr ""
+msgstr "До списку вікторин"
 
 msgid "Quiz mode"
-msgstr ""
+msgstr "Режим вікторини"
 
 msgid "Time left"
-msgstr ""
+msgstr "Залишилося часу"
 
 msgid "Choose one answer per question"
-msgstr ""
+msgstr "Оберіть одну відповідь для кожного запитання"
 
 #, python-format
 msgid "Question %(question_number)s of %(total)s"
-msgstr ""
-
-msgid "Time for this question"
-msgstr ""
+msgstr "Запитання %(question_number)s із %(total)s"
 
 msgid "Open media"
-msgstr ""
+msgstr "Відкрити медіа"
+
+msgid "Next question"
+msgstr "Наступне запитання"
 
 msgid "Finish quiz"
-msgstr ""
+msgstr "Завершити вікторину"
 
 msgid "Go back"
-msgstr ""
+msgstr "Повернутися"
 
 msgid "Quiz not found"
-msgstr ""
+msgstr "Вікторину не знайдено"
 
 msgid "Quiz with this code was not found."
-msgstr ""
+msgstr "Вікторину з таким кодом не знайдено."
+
+#~ msgid "Time for this question"
+#~ msgstr "Час на це запитання"
+
+#~ msgid "The quiz join form will appear here."
+#~ msgstr "Форма приєднання до вікторини з'явиться тут."
