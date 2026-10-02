@@ -4,6 +4,7 @@ import string
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 
 class Quiz(models.Model):
@@ -22,8 +23,8 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
-        verbose_name = 'Вікторина'
-        verbose_name_plural = 'Вікторини'
+        verbose_name = _('Quiz')
+        verbose_name_plural = _('Quizzes')
 
     def __str__(self):
         return self.title
@@ -40,9 +41,9 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     class QuestionType(models.TextChoices):
-        TEXT = 'text', 'Текст'
-        IMAGE = 'image', 'Зображення'
-        VIDEO = 'video', 'Відео'
+        TEXT = 'text', _('Text')
+        IMAGE = 'image', _('Image')
+        VIDEO = 'video', _('Video')
 
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     text = models.TextField()
@@ -52,7 +53,7 @@ class Question(models.Model):
         default=QuestionType.TEXT,
     )
     media_url = models.URLField(blank=True)
-    time_limit = models.PositiveIntegerField(default=30, help_text='Час у секундах')
+    time_limit = models.PositiveIntegerField(default=30, help_text=_('Time in seconds'))
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -101,8 +102,8 @@ class QuizAttempt(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
-        verbose_name = 'Спроба вікторини'
-        verbose_name_plural = 'Спроби вікторин'
+        verbose_name = _('Quiz attempt')
+        verbose_name_plural = _('Quiz attempts')
 
     def __str__(self):
         return f'{self.user} -> {self.quiz}: {self.score}/{self.total}'
