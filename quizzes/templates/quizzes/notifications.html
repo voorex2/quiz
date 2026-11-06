@@ -1,0 +1,28 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Notifications' %}{% endblock %}
+{% block content %}
+<h1>{% trans 'Notifications' %}</h1>
+<p>{% trans 'Follow authors on quiz pages to receive their new public quizzes here.' %}</p>
+<form method="post" class="surface">
+    {% csrf_token %}<input type="hidden" name="action" value="preferences">
+    <label><input type="checkbox" name="weekly"{% if preference.weekly %} checked{% endif %}> {% trans 'Receive quiz of the week' %}</label>
+    <button>{% trans 'Save preferences' %}</button>
+</form>
+<div class="links"><form method="post">{% csrf_token %}<input type="hidden" name="action" value="read"><button class="secondary">{% trans 'Mark all as read' %}</button></form></div>
+{% for notification in notifications %}
+<article class="notification{% if not notification.is_read %} unread{% endif %}">
+    <p>{% if notification.kind == 'weekly' %}{% trans 'Quiz of the week' %}{% else %}{% blocktrans with author=notification.quiz.owner.username %}{{ author }} published a new quiz{% endblocktrans %}{% endif %}</p>
+    <h2><a href="{{ notification.quiz.get_absolute_url }}">{{ notification.quiz.title }}</a></h2>
+    <small>{{ notification.created_at|date:'d.m.Y H:i' }}</small>
+</article>
+{% empty %}<p>{% trans 'No notifications yet' %}</p>{% endfor %}
+<div class="links">
+{% if notifications.has_previous %}<a href="?page={{ notifications.previous_page_number }}">← {% trans 'Previous' %}</a>{% endif %}
+{% if notifications.has_next %}<a href="?page={{ notifications.next_page_number }}">{% trans 'Next' %} →</a>{% endif %}
+</div>
+<h2>{% trans 'Following' %}</h2>
+{% for follow in following %}<form method="post" action="{% url 'author_follow' follow.author_id %}" class="notification">
+{% csrf_token %}<input type="hidden" name="remove" value="1">{{ follow.author.username }} <button class="secondary">{% trans 'Unfollow author' %}</button>
+</form>{% empty %}<p>{% trans 'You are not following any authors yet.' %}</p>{% endfor %}
+{% endblock %}

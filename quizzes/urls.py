@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    favorite_view, statistics_view, follow_view, notifications_view,
     question_create_view,
     quiz_create_view,
     quiz_detail_view,
@@ -17,6 +18,10 @@ from .views import (
 
 
 urlpatterns = [
+    path('statistics/', statistics_view, name='statistics'),
+    path('notifications/', notifications_view, name='notifications'),
+    path('authors/<int:pk>/follow/', follow_view, name='author_follow'),
+    path('<int:pk>/favorite/', favorite_view, name='quiz_favorite'),
     path('', quiz_list_view, name='quiz_list'),
     path('history/', quiz_history_view, name='quiz_history'),
     path('create/', quiz_create_view, name='quiz_create'),

@@ -1,4 +1,7 @@
+{% load i18n %}
 <article class="question-editor">
+    {{ form.question_id }}
+    {% if form.current_image %}<img class="question-image" src="{{ form.current_image.url }}" alt="{{ form.text.value|default:'' }}">{% endif %}
     <div class="question-editor-heading">
         <span class="question-number">{{ index }}</span>
         <div>
@@ -13,6 +16,8 @@
         <div>{{ form.question_type.label_tag }}{{ form.question_type }}</div>
         <div>{{ form.time_limit.label_tag }}{{ form.time_limit }}</div>
         <div>{{ form.media_url.label_tag }}{{ form.media_url }}</div>
+        <div>{{ form.image.label_tag }}{{ form.image }}<small>{% trans 'JPEG, PNG, WebP or GIF, up to 5 MB. Keep empty to retain the current image.' %}</small></div>
+        <label>{{ form.remove_image }} {{ form.remove_image.label }}</label>
     </div>
     {% if form.errors %}<div class="form-errors">{{ form.errors }}</div>{% endif %}
     <div class="answer-editor">

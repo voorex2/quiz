@@ -7,9 +7,30 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
+class Category(models.Model):
+    DEFAULT_LABELS = {name: label for name, label in (
+        ('History', _('History')), ('Science', _('Science')),
+        ('Programming', _('Programming')), ('Cinema', _('Cinema')),
+        ('Geography', _('Geography')), ('General knowledge', _('General knowledge')),
+    )}
+    name = models.CharField(_('Name'), max_length=80, unique=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
+
+    def __str__(self):
+        return str(self.DEFAULT_LABELS.get(self.name, self.name))
+
+
 class Quiz(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, related_name='quizzes', verbose_name=_('Category'))
+    shuffle_answers = models.BooleanField(_('Shuffle answers'), default=True)
+    shuffle_questions = models.BooleanField(_('Shuffle questions'), default=False)
+    announced = models.BooleanField(default=False, editable=False)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -53,6 +74,7 @@ class Question(models.Model):
         default=QuestionType.TEXT,
     )
     media_url = models.URLField(blank=True)
+    image = models.ImageField(_('Image upload'), upload_to='questions/%Y/%m/', blank=True)
     time_limit = models.PositiveIntegerField(default=30, help_text=_('Time in seconds'))
     order = models.PositiveIntegerField(default=0)
 
@@ -107,3 +129,60 @@ class QuizAttempt(models.Model):
 
     def __str__(self):
         return f'{self.user} -> {self.quiz}: {self.score}/{self.total}'
+
+
+class AttemptAnswer(models.Model):
+    attempt = models.ForeignKey(QuizAttempt, on_delete=models.CASCADE, related_name='responses')
+    question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL, related_name='responses')
+    question_text = models.TextField()
+    is_correct = models.BooleanField(default=False)
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='favorites')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='favorites')
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=('user', 'quiz'), name='unique_favorite')]
+
+
+class AuthorFollow(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followers')
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=('user', 'author'), name='unique_author_follow')]
+
+
+class NotificationPreference(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    weekly = models.BooleanField(_('Receive quiz of the week'), default=False)
+
+
+class WeeklyQuiz(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, limit_choices_to={'is_published': True, 'is_private': False})
+    week = models.DateField(_('Week starting Monday'), unique=True)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        from django.utils import timezone
+        if self.week and (self.week.weekday() != 0 or self.week > timezone.localdate()):
+            raise ValidationError(_('Choose a Monday that is not in the future.'))
+        if self.quiz_id and (not self.quiz.is_published or self.quiz.is_private):
+            raise ValidationError(_('Choose a public published quiz.'))
+
+    def __str__(self):
+        return f'{self.week}: {self.quiz}'
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    kind = models.CharField(max_length=10, choices=[('author', _('New author quiz')), ('weekly', _('Quiz of the week'))])
+    event = models.CharField(max_length=80)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at', '-pk')
+        constraints = [models.UniqueConstraint(fields=('user', 'event'), name='unique_notification_event')]

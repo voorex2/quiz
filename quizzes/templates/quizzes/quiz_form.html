@@ -8,11 +8,14 @@
     <p class="eyebrow">{% if is_editing %}{% trans 'Quiz editor' %}{% else %}{% trans 'New project' %}{% endif %}</p>
     <h1>{% if is_editing %}{% trans 'Edit quiz' %}{% else %}{% trans 'Create a quiz' %}{% endif %}</h1>
     <p class="form-intro">{% trans 'Set up the quiz and all its questions in one place.' %}</p>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="quiz-settings-grid">
         {{ form.title }}
         {{ form.description }}
+        <div>{{ form.category.label_tag }}{{ form.category }}</div>
+        <label class="setting-check">{{ form.shuffle_answers }} {{ form.shuffle_answers.label }}</label>
+        <label class="setting-check">{{ form.shuffle_questions }} {{ form.shuffle_questions.label }}</label>
         <label class="setting-check">{{ form.is_published }} <span>{% trans 'Publish quiz' %}</span></label>
         <label class="setting-check">{{ form.is_private }} <span>{% trans 'Private quiz with invite code' %}</span></label>
     </div>
@@ -26,6 +29,7 @@
         <button class="secondary" type="button" id="add-question">+ {% trans 'Add question' %}</button>
     </div>
     {{ question_formset.management_form }}
+    {{ question_formset.non_form_errors }}
     <div id="question-forms" class="question-editor-list">
         {% for question_form in question_formset %}
             {% include 'quizzes/question_editor.html' with form=question_form index=forloop.counter %}
@@ -47,7 +51,7 @@
     const emptyQuestionForm = document.querySelector('#empty-question-form').innerHTML;
     addQuestionButton.addEventListener('click', () => {
         const formNumber = Number(totalForms.value);
-        questionForms.insertAdjacentHTML('beforeend', emptyQuestionForm.replaceAll('__number__', formNumber));
+        questionForms.insertAdjacentHTML('beforeend', emptyQuestionForm.replaceAll('__prefix__', formNumber).replaceAll('__number__', formNumber + 1));
         totalForms.value = formNumber + 1;
     });
 </script>

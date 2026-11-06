@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 17:24+0300\n"
+"POT-Creation-Date: 2026-11-06 14:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,468 +17,849 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\login\forms.py:16 .\login\forms.py:40 .\login\forms.py:67
 msgid "Username"
 msgstr ""
 
+#: .\login\forms.py:17
 msgid "Email address"
 msgstr ""
 
+#: .\login\forms.py:18 .\login\forms.py:68
 msgid "Password"
 msgstr ""
 
+#: .\login\forms.py:19
 msgid "Password confirmation"
 msgstr ""
 
+#: .\login\forms.py:21
 msgid "Up to 150 characters. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
+#: .\login\forms.py:24 .\login\forms.py:54
 msgid "Your password must contain at least 8 characters and not be too simple."
 msgstr ""
 
+#: .\login\forms.py:27
 msgid "Enter the same password again for verification."
 msgstr ""
 
+#: .\login\forms.py:50
 msgid "Current password"
 msgstr ""
 
+#: .\login\forms.py:51
 msgid "New password"
 msgstr ""
 
+#: .\login\forms.py:52
 msgid "New password confirmation"
 msgstr ""
 
+#: .\login\forms.py:57
 msgid "Enter the new password again for verification."
 msgstr ""
 
+#: .\login\templates\login\base.html:8
 msgid "Online quiz"
 msgstr ""
 
+#: .\login\templates\login\base.html:204
 msgid "Quizzer"
 msgstr ""
 
+#: .\login\templates\login\base.html:206
 msgid "Main navigation"
 msgstr ""
 
+#: .\login\templates\login\base.html:207 .\main\templates\main\home.html:4
 msgid "Home"
 msgstr ""
 
+#: .\login\templates\login\base.html:209
+#: .\quizzes\templates\quizzes\quiz_list.html:31
+#: .\quizzes\templates\quizzes\quiz_list.html:33
 msgid "All quizzes"
 msgstr ""
 
+#: .\login\templates\login\base.html:210
+#: .\quizzes\templates\quizzes\quiz_list.html:10
+#: .\quizzes\templates\quizzes\quiz_list.html:30
+#: .\quizzes\templates\quizzes\quiz_list.html:34
 msgid "My quizzes"
 msgstr ""
 
+#: .\login\templates\login\base.html:211 .\quizzes\models.py:12
+#: .\quizzes\templates\quizzes\quiz_history.html:4
 msgid "History"
 msgstr ""
 
+#: .\login\templates\login\base.html:212
+#: .\quizzes\templates\quizzes\quiz_list.html:10
+msgid "Favorites"
+msgstr ""
+
+#: .\login\templates\login\base.html:213
+msgid "Statistics"
+msgstr ""
+
+#: .\login\templates\login\base.html:214
+#: .\quizzes\templates\quizzes\notifications.html:3
+#: .\quizzes\templates\quizzes\notifications.html:5
+msgid "Notifications"
+msgstr ""
+
+#: .\login\templates\login\base.html:215 .\login\templates\login\profile.html:4
+#: .\login\templates\login\profile.html:7
 msgid "Profile"
 msgstr ""
 
+#: .\login\templates\login\base.html:216
+#: .\login\templates\login\profile.html:27
 msgid "Log out"
 msgstr ""
 
+#: .\login\templates\login\base.html:218 .\login\templates\login\login.html:4
+#: .\login\templates\login\login.html:7 .\login\templates\login\login.html:11
+#: .\main\templates\main\home.html:17
 msgid "Log in"
 msgstr ""
 
+#: .\login\templates\login\base.html:223
 msgid "Language"
 msgstr ""
 
+#: .\login\templates\login\base.html:235
 msgid "Online quiz · a space for curious challenges"
 msgstr ""
 
+#: .\login\templates\login\login.html:14 .\main\templates\main\home.html:16
 msgid "Create an account"
 msgstr ""
 
+#: .\login\templates\login\profile.html:8
 msgid "You are logged in as"
 msgstr ""
 
+#: .\login\templates\login\profile.html:9
 msgid "Email:"
 msgstr ""
 
+#: .\login\templates\login\profile.html:9
 msgid "not specified"
 msgstr ""
 
+#: .\login\templates\login\profile.html:11
 msgid "Change username"
 msgstr ""
 
+#: .\login\templates\login\profile.html:15
 msgid "Save username"
 msgstr ""
 
+#: .\login\templates\login\profile.html:19
+#: .\login\templates\login\profile.html:23
 msgid "Change password"
 msgstr ""
 
+#: .\login\templates\login\register.html:4
+#: .\login\templates\login\register.html:7
 msgid "Registration"
 msgstr ""
 
+#: .\login\templates\login\register.html:11
 msgid "Register"
 msgstr ""
 
+#: .\login\templates\login\register.html:14
 msgid "Already have an account"
 msgstr ""
 
+#: .\main\templates\main\home.html:8
 msgid "Learn · play · win"
 msgstr ""
 
+#: .\main\templates\main\home.html:9
 msgid "Your next great quiz starts here."
 msgstr ""
 
+#: .\main\templates\main\home.html:10
 msgid ""
 "Create your own questions, join challenges with a code and test your "
 "knowledge with others."
 msgstr ""
 
+#: .\main\templates\main\home.html:13
+#: .\quizzes\templates\quizzes\quiz_form.html:4
+#: .\quizzes\templates\quizzes\quiz_form.html:9
+#: .\quizzes\templates\quizzes\quiz_list.html:14
 msgid "Create a quiz"
 msgstr ""
 
+#: .\main\templates\main\home.html:14
 msgid "Join with a code"
 msgstr ""
 
+#: .\main\templates\main\home.html:22 .\quizzes\models.py:48
+#: .\quizzes\templates\quizzes\quiz_list.html:4
+#: .\quizzes\templates\quizzes\quiz_list.html:10
 msgid "Quizzes"
 msgstr ""
 
+#: .\main\templates\main\home.html:25
+#: .\quizzes\templates\quizzes\quiz_list.html:9
 msgid "Choose your game"
 msgstr ""
 
+#: .\main\templates\main\home.html:26
 msgid "Quizzes for you"
 msgstr ""
 
+#: .\main\templates\main\home.html:28
 msgid "View all →"
 msgstr ""
 
+#: .\main\templates\main\home.html:32
 msgid "Popular quizzes"
 msgstr ""
 
+#: .\main\templates\main\home.html:35
 msgid "No popular quizzes yet."
 msgstr ""
 
+#: .\main\templates\main\home.html:36
 msgid "Open collection →"
 msgstr ""
 
+#: .\main\templates\main\home.html:39
 msgid "New quizzes"
 msgstr ""
 
+#: .\main\templates\main\home.html:42
 msgid "No new quizzes yet."
 msgstr ""
 
+#: .\main\templates\main\home.html:43
 msgid "See what's new →"
 msgstr ""
 
+#: .\main\templates\main\home.html:50
 msgid "Quick start"
 msgstr ""
 
+#: .\main\templates\main\home.html:51
 msgid "Have an invitation code?"
 msgstr ""
 
+#: .\main\templates\main\home.html:52
 msgid "Enter the invite code to join a private quiz."
 msgstr ""
 
+#: .\main\templates\main\home.html:57
 msgid "Join"
 msgstr ""
 
+#: .\quizzes\forms.py:11
 msgid "Quiz title"
 msgstr ""
 
+#: .\quizzes\forms.py:12
 msgid "Description"
 msgstr ""
 
+#: .\quizzes\forms.py:13 .\quizzes\templates\quizzes\quiz_form.html:19
 msgid "Publish quiz"
 msgstr ""
 
+#: .\quizzes\forms.py:14 .\quizzes\templates\quizzes\quiz_form.html:20
 msgid "Private quiz with invite code"
 msgstr ""
 
+#: .\quizzes\forms.py:24 .\quizzes\forms.py:79
 msgid "Question text"
 msgstr ""
 
+#: .\quizzes\forms.py:25 .\quizzes\forms.py:80
 msgid "Question type"
 msgstr ""
 
+#: .\quizzes\forms.py:26 .\quizzes\forms.py:81
 msgid "Image or video URL"
 msgstr ""
 
+#: .\quizzes\forms.py:27 .\quizzes\forms.py:82
 msgid "Time limit (seconds)"
 msgstr ""
 
+#: .\quizzes\forms.py:28
 msgid "Question order"
 msgstr ""
 
+#: .\quizzes\forms.py:30 .\quizzes\forms.py:93 .\quizzes\models.py:65
 msgid "Text"
 msgstr ""
 
+#: .\quizzes\forms.py:31 .\quizzes\forms.py:93 .\quizzes\models.py:66
 msgid "Image"
 msgstr ""
 
+#: .\quizzes\forms.py:32 .\quizzes\forms.py:93 .\quizzes\models.py:67
 msgid "Video"
 msgstr ""
 
+#: .\quizzes\forms.py:43
 msgid "Answer option"
 msgstr ""
 
+#: .\quizzes\forms.py:44 .\quizzes\forms.py:87
 msgid "Correct answer"
 msgstr ""
 
+#: .\quizzes\forms.py:53 .\quizzes\models.py:77
+msgid "Image upload"
+msgstr ""
+
+#: .\quizzes\forms.py:54
+msgid "Remove image"
+msgstr ""
+
+#: .\quizzes\forms.py:73
+msgid "Upload a JPEG, PNG, WebP or GIF image up to 5 MB."
+msgstr ""
+
+#: .\quizzes\forms.py:83
 msgid "Answer 1"
 msgstr ""
 
+#: .\quizzes\forms.py:84
 msgid "Answer 2"
 msgstr ""
 
+#: .\quizzes\forms.py:85
 msgid "Answer 3"
 msgstr ""
 
+#: .\quizzes\forms.py:86
 msgid "Answer 4"
 msgstr ""
 
+#: .\quizzes\forms.py:91
 msgid "Remove question"
 msgstr ""
 
+#: .\quizzes\forms.py:108
 msgid "Choose a question type."
 msgstr ""
 
+#: .\quizzes\forms.py:110
 msgid "Enter a time limit."
 msgstr ""
 
+#: .\quizzes\forms.py:113
 msgid "Add at least two answer options."
 msgstr ""
 
+#: .\quizzes\forms.py:116
 msgid "Enter the question text."
 msgstr ""
 
+#: .\quizzes\forms.py:118
 msgid "Select the correct answer."
 msgstr ""
 
+#: .\quizzes\forms.py:120
 msgid "The correct answer cannot be empty."
 msgstr ""
 
+#: .\quizzes\models.py:12
+msgid "Science"
+msgstr ""
+
+#: .\quizzes\models.py:13
+msgid "Programming"
+msgstr ""
+
+#: .\quizzes\models.py:13
+msgid "Cinema"
+msgstr ""
+
+#: .\quizzes\models.py:14
+msgid "Geography"
+msgstr ""
+
+#: .\quizzes\models.py:14
+msgid "General knowledge"
+msgstr ""
+
+#: .\quizzes\models.py:16
+msgid "Name"
+msgstr ""
+
+#: .\quizzes\models.py:20 .\quizzes\models.py:30
+#: .\quizzes\templates\quizzes\quiz_list.html:21
+msgid "Category"
+msgstr ""
+
+#: .\quizzes\models.py:21
+msgid "Categories"
+msgstr ""
+
+#: .\quizzes\models.py:31
+msgid "Shuffle answers"
+msgstr ""
+
+#: .\quizzes\models.py:32
+msgid "Shuffle questions"
+msgstr ""
+
+#: .\quizzes\models.py:47 .\quizzes\templates\quizzes\quiz_detail.html:4
+#: .\quizzes\templates\quizzes\quiz_list.html:42
+#: .\quizzes\templates\quizzes\statistics.html:11
+#: .\quizzes\templates\quizzes\statistics.html:18
 msgid "Quiz"
 msgstr ""
 
+#: .\quizzes\models.py:78
 msgid "Time in seconds"
 msgstr ""
 
+#: .\quizzes\models.py:127
 msgid "Quiz attempt"
 msgstr ""
 
+#: .\quizzes\models.py:128
 msgid "Quiz attempts"
 msgstr ""
 
+#: .\quizzes\models.py:159 .\quizzes\templates\quizzes\notifications.html:9
+msgid "Receive quiz of the week"
+msgstr ""
+
+#: .\quizzes\models.py:164
+msgid "Week starting Monday"
+msgstr ""
+
+#: .\quizzes\models.py:170
+msgid "Choose a Monday that is not in the future."
+msgstr ""
+
+#: .\quizzes\models.py:172
+msgid "Choose a public published quiz."
+msgstr ""
+
+#: .\quizzes\models.py:181
+msgid "New author quiz"
+msgstr ""
+
+#: .\quizzes\models.py:181 .\quizzes\templates\quizzes\notifications.html:15
+msgid "Quiz of the week"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:6
+msgid "Follow authors on quiz pages to receive their new public quizzes here."
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:10
+msgid "Save preferences"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:12
+msgid "Mark all as read"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:15
+#, python-format
+msgid "%(author)s published a new quiz"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:19
+msgid "No notifications yet"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:21
+msgid "Previous"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:22
+msgid "Next"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:24
+msgid "Following"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:26
+#: .\quizzes\templates\quizzes\quiz_detail.html:23
+msgid "Unfollow author"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\notifications.html:27
+msgid "You are not following any authors yet."
+msgstr ""
+
+#: .\quizzes\templates\quizzes\question_editor.html:7
+#: .\quizzes\templates\quizzes\statistics.html:18
 msgid "Question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_editor.html:8
 msgid "One question, four answer slots, one correct choice."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_editor.html:10
 msgid "Remove"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_editor.html:18
+msgid ""
+"JPEG, PNG, WebP or GIF, up to 5 MB. Keep empty to retain the current image."
+msgstr ""
+
+#: .\quizzes\templates\quizzes\question_editor.html:24
 msgid "Answers"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_editor.html:25
 msgid "Select the correct one"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:4
+#: .\quizzes\templates\quizzes\question_form.html:9
 msgid "Add a question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:10
 msgid "Write a question, set the time limit and mark the correct answer."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:14
 msgid "Answer options"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:15
 msgid "Add at least two options and mark the correct one."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:23
 msgid "Save question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\question_form.html:24
 msgid "Back to quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:16
+msgid "Remove from favorites"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:16
+msgid "Save to favorites"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:23
+msgid "Follow author"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:25
+#: .\quizzes\templates\quizzes\statistics.html:3
+#: .\quizzes\templates\quizzes\statistics.html:5
+msgid "Author statistics"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:29
 msgid "Author"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:30
+#: .\quizzes\templates\quizzes\quiz_take.html:19
 msgid "questions"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:32
 msgid "Private"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:36
+#: .\quizzes\templates\quizzes\quiz_join.html:14
 msgid "Invite code"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:43
 msgid "Liked"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:43
 msgid "Like"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:48
 msgid "Take quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:50
+#: .\quizzes\templates\quizzes\quiz_rating.html:4
 msgid "Rating"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:54
 msgid "This quiz has no questions yet."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:58
+#: .\quizzes\templates\quizzes\quiz_form.html:4
+#: .\quizzes\templates\quizzes\quiz_form.html:9
 msgid "Edit quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:59
 msgid "Delete this quiz permanently?"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:61
 msgid "Delete quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:8
 msgid "Quiz editor"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:8
 msgid "New project"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:10
 msgid "Set up the quiz and all its questions in one place."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:26
 msgid "Questions"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:27
 msgid "Add questions and mark one correct answer for each."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:29
 msgid "Add question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:42
 msgid "Save quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_form.html:43
 msgid "Cancel"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:9
 msgid "Your games"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:10
 msgid "Results history"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:21
 msgid "Open quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:27
 msgid "No history yet"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:28
 msgid "Your completed games will appear here"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_history.html:29
 msgid "Go to quizzes"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_join.html:4
+#: .\quizzes\templates\quizzes\quiz_join.html:9
 msgid "Join a private quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_join.html:8
 msgid "Invite only"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_join.html:10
 msgid "Enter the code shared by the quiz author."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_join.html:17
 msgid "Join quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_join.html:18
 msgid "Back home"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:11
 msgid "Your drafts, private and published quizzes."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:11
 msgid "Choose a topic and test your knowledge."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:22
+msgid "All categories"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\quiz_list.html:25
 msgid "Search by quiz title"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:26
 msgid "Search"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:44
 msgid "Check your knowledge in this quiz."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:46
 msgid "View →"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:52
 msgid "Nothing here yet"
 msgstr ""
 
-msgid "No published quizzes yet"
+#: .\quizzes\templates\quizzes\quiz_list.html:53
+#: .\quizzes\templates\quizzes\statistics.html:13
+msgid "No quizzes found"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:54
 msgid "Create the first quiz and share it with others."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_list.html:55
 msgid "Create the first quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:9
 msgid "Leaderboard"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:19
 msgid "Guest"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:27
 msgid "No attempts yet"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:28
 msgid "Be the first one to complete this quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:4
 msgid "Result"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:8
 msgid "Quiz completed"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:9
 msgid "Your result"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:10
 msgid "Quiz:"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:12
 #, python-format
 msgid "Correct answers: %(score)s out of %(total)s."
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:14
 msgid "Try again"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_result.html:15
 msgid "Back to quizzes"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:9
 msgid "Quiz mode"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:14
 msgid "Time left"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:20
 msgid "Choose one answer per question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:30
 #, python-format
 msgid "Question %(question_number)s of %(total)s"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:37
 msgid "Open media"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:49
 msgid "Next question"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:50
 msgid "Finish quiz"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\quiz_take.html:51
 msgid "Go back"
 msgstr ""
 
+#: .\quizzes\templates\quizzes\statistics.html:7
+#: .\quizzes\templates\quizzes\statistics.html:11
+msgid "Attempts"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:8
+#: .\quizzes\templates\quizzes\statistics.html:11
+msgid "Average result"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:15
+msgid "Questions with the most errors"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:16
+msgid ""
+"Question statistics include attempts recorded after this feature was added. "
+"Skipped questions count as errors."
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:18
+msgid "Responses"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:18
+msgid "Error rate"
+msgstr ""
+
+#: .\quizzes\templates\quizzes\statistics.html:20
+msgid "No response data yet"
+msgstr ""
+
+#: .\quizzes\views.py:98
 msgid "Quiz not found"
 msgstr ""
 
+#: .\quizzes\views.py:133
 msgid "Quiz with this code was not found."
+msgstr ""
+
+#: .\quizzes\views.py:187
+msgid "Question not found"
 msgstr ""

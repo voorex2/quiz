@@ -1,6 +1,16 @@
 from django.contrib import admin
 
-from .models import Answer, Question, Quiz, QuizAttempt
+from .models import Answer, Question, Quiz, QuizAttempt, Category, WeeklyQuiz
+
+admin.site.register(Category)
+
+
+@admin.register(WeeklyQuiz)
+class WeeklyQuizAdmin(admin.ModelAdmin):
+    list_display = ('week', 'quiz')
+
+    def get_readonly_fields(self, request, obj=None):
+        return ('week', 'quiz') if obj else ()
 
 
 class AnswerInline(admin.TabularInline):
@@ -18,7 +28,7 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'is_published', 'created_at')
-    list_filter = ('is_published',)
+    list_filter = ('is_published', 'is_private', 'category')
     search_fields = ('title', 'description')
     readonly_fields = ('invite_code',)
 

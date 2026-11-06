@@ -6,6 +6,25 @@
 {% block content %}
 <h1>{{ quiz.title }}</h1>
 <p>{{ quiz.description }}</p>
+{% if quiz.category %}<span class="meta-pill">{{ quiz.category }}</span>{% endif %}
+{% if user.is_authenticated %}
+<div class="links">
+    {% if quiz.is_published and not quiz.is_private %}
+    <form method="post" action="{% url 'quiz_favorite' quiz.pk %}">
+        {% csrf_token %}
+        {% if favorite %}<input type="hidden" name="remove" value="1">{% endif %}
+        <button class="secondary">{% if favorite %}{% trans 'Remove from favorites' %}{% else %}{% trans 'Save to favorites' %}{% endif %}</button>
+    </form>
+    {% endif %}
+    {% if user != quiz.owner %}
+    <form method="post" action="{% url 'author_follow' quiz.owner_id %}">
+        {% csrf_token %}
+        {% if following %}<input type="hidden" name="remove" value="1">{% endif %}
+        <button class="secondary">{% if following %}{% trans 'Unfollow author' %}{% else %}{% trans 'Follow author' %}{% endif %}</button>
+    </form>
+    {% else %}<a class="button secondary" href="{% url 'statistics' %}">{% trans 'Author statistics' %}</a>{% endif %}
+</div>
+{% endif %}
 <div class="quiz-meta">
 	<span class="meta-pill">{% trans 'Author' %}: {{ quiz.owner.username }}</span>
 	<span class="meta-pill">{{ quiz.questions.count }} {% trans 'questions' %}</span>
