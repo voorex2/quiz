@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-02 17:24+0300\n"
+"POT-Creation-Date: 2026-11-06 14:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,112 +20,175 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
+#: .\login\forms.py:16 .\login\forms.py:40 .\login\forms.py:67
 msgid "Username"
 msgstr "Ім'я користувача"
 
+#: .\login\forms.py:17
 msgid "Email address"
 msgstr "Електронна пошта"
 
+#: .\login\forms.py:18 .\login\forms.py:68
 msgid "Password"
 msgstr "Пароль"
 
+#: .\login\forms.py:19
 msgid "Password confirmation"
 msgstr "Підтвердження пароля"
 
+#: .\login\forms.py:21
 msgid "Up to 150 characters. Letters, digits and @/./+/-/_ only."
 msgstr "До 150 символів. Тільки літери, цифри та @/./+/-/_ ."
 
+#: .\login\forms.py:24 .\login\forms.py:54
 msgid "Your password must contain at least 8 characters and not be too simple."
 msgstr ""
 "Ваш пароль має містити щонайменше 8 символів і не бути занадто простим."
 
+#: .\login\forms.py:27
 msgid "Enter the same password again for verification."
 msgstr "Введіть той самий пароль ще раз для перевірки."
 
+#: .\login\forms.py:50
 msgid "Current password"
 msgstr "Поточний пароль"
 
+#: .\login\forms.py:51
 msgid "New password"
 msgstr "Новий пароль"
 
+#: .\login\forms.py:52
 msgid "New password confirmation"
 msgstr "Підтвердження нового пароля"
 
+#: .\login\forms.py:57
 msgid "Enter the new password again for verification."
 msgstr "Введіть новий пароль ще раз для перевірки."
 
+#: .\login\templates\login\base.html:8
 msgid "Online quiz"
 msgstr "Онлайн-вікторина"
 
+#: .\login\templates\login\base.html:204
 msgid "Quizzer"
 msgstr "Квізер"
 
+#: .\login\templates\login\base.html:206
 msgid "Main navigation"
 msgstr "Основна навігація"
 
+#: .\login\templates\login\base.html:207 .\main\templates\main\home.html:4
 msgid "Home"
 msgstr "Домівка"
 
+#: .\login\templates\login\base.html:209
+#: .\quizzes\templates\quizzes\quiz_list.html:31
+#: .\quizzes\templates\quizzes\quiz_list.html:33
 msgid "All quizzes"
 msgstr "Усі вікторини"
 
+#: .\login\templates\login\base.html:210
+#: .\quizzes\templates\quizzes\quiz_list.html:10
+#: .\quizzes\templates\quizzes\quiz_list.html:30
+#: .\quizzes\templates\quizzes\quiz_list.html:34
 msgid "My quizzes"
 msgstr "Мої вікторини"
 
+#: .\login\templates\login\base.html:211 .\quizzes\models.py:12
+#: .\quizzes\templates\quizzes\quiz_history.html:4
 msgid "History"
 msgstr "Історія"
 
+#: .\login\templates\login\base.html:212
+#: .\quizzes\templates\quizzes\quiz_list.html:10
+msgid "Favorites"
+msgstr "Обране"
+
+#: .\login\templates\login\base.html:213
+msgid "Statistics"
+msgstr "Статистика"
+
+#: .\login\templates\login\base.html:214
+#: .\quizzes\templates\quizzes\notifications.html:3
+#: .\quizzes\templates\quizzes\notifications.html:5
+msgid "Notifications"
+msgstr "Сповіщення"
+
+#: .\login\templates\login\base.html:215 .\login\templates\login\profile.html:4
+#: .\login\templates\login\profile.html:7
 msgid "Profile"
 msgstr "Профіль"
 
+#: .\login\templates\login\base.html:216
+#: .\login\templates\login\profile.html:27
 msgid "Log out"
 msgstr "Вийти"
 
+#: .\login\templates\login\base.html:218 .\login\templates\login\login.html:4
+#: .\login\templates\login\login.html:7 .\login\templates\login\login.html:11
+#: .\main\templates\main\home.html:17
 msgid "Log in"
 msgstr "Увійти"
 
+#: .\login\templates\login\base.html:223
 msgid "Language"
 msgstr "Мова"
 
+#: .\login\templates\login\base.html:235
 msgid "Online quiz · a space for curious challenges"
 msgstr "Онлайн-вікторина · простір для цікавих викликів"
 
+#: .\login\templates\login\login.html:14 .\main\templates\main\home.html:16
 msgid "Create an account"
 msgstr "Створити акаунт"
 
+#: .\login\templates\login\profile.html:8
 msgid "You are logged in as"
 msgstr "Ви увійшли як"
 
+#: .\login\templates\login\profile.html:9
 msgid "Email:"
 msgstr "Електронна пошта:"
 
+#: .\login\templates\login\profile.html:9
 msgid "not specified"
 msgstr "не вказано"
 
+#: .\login\templates\login\profile.html:11
 msgid "Change username"
 msgstr "Змінити ім'я користувача"
 
+#: .\login\templates\login\profile.html:15
 msgid "Save username"
 msgstr "Зберегти ім'я користувача"
 
+#: .\login\templates\login\profile.html:19
+#: .\login\templates\login\profile.html:23
 msgid "Change password"
 msgstr "Змінити пароль"
 
+#: .\login\templates\login\register.html:4
+#: .\login\templates\login\register.html:7
 msgid "Registration"
 msgstr "Реєстрація"
 
+#: .\login\templates\login\register.html:11
 msgid "Register"
 msgstr "Зареєструватися"
 
+#: .\login\templates\login\register.html:14
 msgid "Already have an account"
 msgstr "Вже маєте акаунт"
 
+#: .\main\templates\main\home.html:8
 msgid "Learn · play · win"
 msgstr "Навчайся · грай · перемагай"
 
+#: .\main\templates\main\home.html:9
 msgid "Your next great quiz starts here."
 msgstr "Твоя наступна велика вікторина починається тут."
 
+#: .\main\templates\main\home.html:10
 msgid ""
 "Create your own questions, join challenges with a code and test your "
 "knowledge with others."
@@ -133,363 +196,684 @@ msgstr ""
 "Створюй власні запитання, приєднуйся до викликів за кодом і перевіряй свої "
 "знання разом з іншими."
 
+#: .\main\templates\main\home.html:13
+#: .\quizzes\templates\quizzes\quiz_form.html:4
+#: .\quizzes\templates\quizzes\quiz_form.html:9
+#: .\quizzes\templates\quizzes\quiz_list.html:14
 msgid "Create a quiz"
 msgstr "Створити вікторину"
 
+#: .\main\templates\main\home.html:14
 msgid "Join with a code"
 msgstr "Приєднатися за кодом"
 
+#: .\main\templates\main\home.html:22 .\quizzes\models.py:48
+#: .\quizzes\templates\quizzes\quiz_list.html:4
+#: .\quizzes\templates\quizzes\quiz_list.html:10
 msgid "Quizzes"
 msgstr "Вікторини"
 
+#: .\main\templates\main\home.html:25
+#: .\quizzes\templates\quizzes\quiz_list.html:9
 msgid "Choose your game"
 msgstr "Обери гру"
 
+#: .\main\templates\main\home.html:26
 msgid "Quizzes for you"
 msgstr "Вікторини для тебе"
 
+#: .\main\templates\main\home.html:28
 msgid "View all →"
 msgstr "Переглянути всі →"
 
+#: .\main\templates\main\home.html:32
 msgid "Popular quizzes"
 msgstr "Популярні вікторини"
 
+#: .\main\templates\main\home.html:35
 msgid "No popular quizzes yet."
 msgstr "Поки немає популярних вікторин."
 
+#: .\main\templates\main\home.html:36
 msgid "Open collection →"
 msgstr "Відкрити колекцію →"
 
+#: .\main\templates\main\home.html:39
 msgid "New quizzes"
 msgstr "Нові вікторини"
 
+#: .\main\templates\main\home.html:42
 msgid "No new quizzes yet."
 msgstr "Поки немає нових вікторин."
 
+#: .\main\templates\main\home.html:43
 msgid "See what's new →"
 msgstr "Дивитися новинки →"
 
+#: .\main\templates\main\home.html:50
 msgid "Quick start"
 msgstr "Швидкий старт"
 
+#: .\main\templates\main\home.html:51
 msgid "Have an invitation code?"
 msgstr "Маєте код запрошення?"
 
+#: .\main\templates\main\home.html:52
 msgid "Enter the invite code to join a private quiz."
 msgstr "Введіть код запрошення, щоб приєднатися до приватної вікторини."
 
+#: .\main\templates\main\home.html:57
 msgid "Join"
 msgstr "Приєднатися"
 
+#: .\quizzes\forms.py:11
 msgid "Quiz title"
 msgstr "Назва вікторини"
 
+#: .\quizzes\forms.py:12
 msgid "Description"
 msgstr "Опис"
 
+#: .\quizzes\forms.py:13 .\quizzes\templates\quizzes\quiz_form.html:19
 msgid "Publish quiz"
 msgstr "Опублікувати вікторину"
 
+#: .\quizzes\forms.py:14 .\quizzes\templates\quizzes\quiz_form.html:20
 msgid "Private quiz with invite code"
 msgstr "Приватна вікторина з кодом запрошення"
 
+#: .\quizzes\forms.py:24 .\quizzes\forms.py:79
 msgid "Question text"
 msgstr "Текст запитання"
 
+#: .\quizzes\forms.py:25 .\quizzes\forms.py:80
 msgid "Question type"
 msgstr "Тип запитання"
 
+#: .\quizzes\forms.py:26 .\quizzes\forms.py:81
 msgid "Image or video URL"
 msgstr "Посилання на зображення або відео"
 
+#: .\quizzes\forms.py:27 .\quizzes\forms.py:82
 msgid "Time limit (seconds)"
 msgstr "Обмеження часу (секунди)"
 
+#: .\quizzes\forms.py:28
 msgid "Question order"
 msgstr "Порядок запитання"
 
+#: .\quizzes\forms.py:30 .\quizzes\forms.py:93 .\quizzes\models.py:65
 msgid "Text"
 msgstr "Текст"
 
+#: .\quizzes\forms.py:31 .\quizzes\forms.py:93 .\quizzes\models.py:66
 msgid "Image"
 msgstr "Зображення"
 
+#: .\quizzes\forms.py:32 .\quizzes\forms.py:93 .\quizzes\models.py:67
 msgid "Video"
 msgstr "Відео"
 
+#: .\quizzes\forms.py:43
 msgid "Answer option"
 msgstr "Варіант відповіді"
 
+#: .\quizzes\forms.py:44 .\quizzes\forms.py:87
 msgid "Correct answer"
 msgstr "Правильна відповідь"
 
+#: .\quizzes\forms.py:53 .\quizzes\models.py:77
+msgid "Image upload"
+msgstr "Завантажити зображення"
+
+#: .\quizzes\forms.py:54
+msgid "Remove image"
+msgstr "Видалити зображення"
+
+#: .\quizzes\forms.py:73
+msgid "Upload a JPEG, PNG, WebP or GIF image up to 5 MB."
+msgstr "Завантажте зображення JPEG, PNG, WebP або GIF розміром до 5 МБ."
+
+#: .\quizzes\forms.py:83
 msgid "Answer 1"
 msgstr "Відповідь 1"
 
+#: .\quizzes\forms.py:84
 msgid "Answer 2"
 msgstr "Відповідь 2"
 
+#: .\quizzes\forms.py:85
 msgid "Answer 3"
 msgstr "Відповідь 3"
 
+#: .\quizzes\forms.py:86
 msgid "Answer 4"
 msgstr "Відповідь 4"
 
+#: .\quizzes\forms.py:91
 msgid "Remove question"
 msgstr "Видалити запитання"
 
+#: .\quizzes\forms.py:108
 msgid "Choose a question type."
 msgstr "Оберіть тип запитання."
 
+#: .\quizzes\forms.py:110
 msgid "Enter a time limit."
 msgstr "Вкажіть обмеження часу."
 
+#: .\quizzes\forms.py:113
 msgid "Add at least two answer options."
 msgstr "Додайте щонайменше два варіанти відповіді."
 
+#: .\quizzes\forms.py:116
 msgid "Enter the question text."
 msgstr "Введіть текст запитання."
 
+#: .\quizzes\forms.py:118
 msgid "Select the correct answer."
 msgstr "Оберіть правильну відповідь."
 
+#: .\quizzes\forms.py:120
 msgid "The correct answer cannot be empty."
 msgstr "Поле правильної відповіді не може бути порожнім."
 
+#: .\quizzes\models.py:12
+msgid "Science"
+msgstr "Наука"
+
+#: .\quizzes\models.py:13
+msgid "Programming"
+msgstr "Програмування"
+
+#: .\quizzes\models.py:13
+msgid "Cinema"
+msgstr "Кіно"
+
+#: .\quizzes\models.py:14
+msgid "Geography"
+msgstr "Географія"
+
+#: .\quizzes\models.py:14
+msgid "General knowledge"
+msgstr "Загальні знання"
+
+#: .\quizzes\models.py:16
+msgid "Name"
+msgstr "Назва"
+
+#: .\quizzes\models.py:20 .\quizzes\models.py:30
+#: .\quizzes\templates\quizzes\quiz_list.html:21
+msgid "Category"
+msgstr "Категорія"
+
+#: .\quizzes\models.py:21
+msgid "Categories"
+msgstr "Категорії"
+
+#: .\quizzes\models.py:31
+msgid "Shuffle answers"
+msgstr "Перемішувати відповіді"
+
+#: .\quizzes\models.py:32
+msgid "Shuffle questions"
+msgstr "Перемішувати запитання"
+
+#: .\quizzes\models.py:47 .\quizzes\templates\quizzes\quiz_detail.html:4
+#: .\quizzes\templates\quizzes\quiz_list.html:42
+#: .\quizzes\templates\quizzes\statistics.html:11
+#: .\quizzes\templates\quizzes\statistics.html:18
 msgid "Quiz"
 msgstr "Вікторина"
 
+#: .\quizzes\models.py:78
 msgid "Time in seconds"
 msgstr "Час у секундах"
 
+#: .\quizzes\models.py:127
 msgid "Quiz attempt"
 msgstr "Спроба вікторини"
 
+#: .\quizzes\models.py:128
 msgid "Quiz attempts"
 msgstr "Спроби вікторин"
 
+#: .\quizzes\models.py:159 .\quizzes\templates\quizzes\notifications.html:9
+msgid "Receive quiz of the week"
+msgstr "Отримувати вікторину тижня"
+
+#: .\quizzes\models.py:164
+msgid "Week starting Monday"
+msgstr "Початок тижня (понеділок)"
+
+#: .\quizzes\models.py:170
+msgid "Choose a Monday that is not in the future."
+msgstr "Оберіть понеділок, який уже настав."
+
+#: .\quizzes\models.py:172
+msgid "Choose a public published quiz."
+msgstr "Оберіть опубліковану публічну вікторину."
+
+#: .\quizzes\models.py:181
+msgid "New author quiz"
+msgstr "Нова вікторина автора"
+
+#: .\quizzes\models.py:181 .\quizzes\templates\quizzes\notifications.html:15
+msgid "Quiz of the week"
+msgstr "Вікторина тижня"
+
+#: .\quizzes\templates\quizzes\notifications.html:6
+msgid "Follow authors on quiz pages to receive their new public quizzes here."
+msgstr "Підписуйтеся на авторів на сторінках вікторин, щоб отримувати тут їхні нові публічні вікторини."
+
+#: .\quizzes\templates\quizzes\notifications.html:10
+msgid "Save preferences"
+msgstr "Зберегти налаштування"
+
+#: .\quizzes\templates\quizzes\notifications.html:12
+msgid "Mark all as read"
+msgstr "Позначити всі як прочитані"
+
+#: .\quizzes\templates\quizzes\notifications.html:15
+#, python-format
+msgid "%(author)s published a new quiz"
+msgstr "%(author)s опублікував нову вікторину"
+
+#: .\quizzes\templates\quizzes\notifications.html:19
+msgid "No notifications yet"
+msgstr "Сповіщень поки немає"
+
+#: .\quizzes\templates\quizzes\notifications.html:21
+msgid "Previous"
+msgstr "Назад"
+
+#: .\quizzes\templates\quizzes\notifications.html:22
+msgid "Next"
+msgstr "Далі"
+
+#: .\quizzes\templates\quizzes\notifications.html:24
+msgid "Following"
+msgstr "Підписки"
+
+#: .\quizzes\templates\quizzes\notifications.html:26
+#: .\quizzes\templates\quizzes\quiz_detail.html:23
+msgid "Unfollow author"
+msgstr "Відписатися від автора"
+
+#: .\quizzes\templates\quizzes\notifications.html:27
+msgid "You are not following any authors yet."
+msgstr "Ви поки не підписані на жодного автора."
+
+#: .\quizzes\templates\quizzes\question_editor.html:7
+#: .\quizzes\templates\quizzes\statistics.html:18
 msgid "Question"
 msgstr "Запитання"
 
+#: .\quizzes\templates\quizzes\question_editor.html:8
 msgid "One question, four answer slots, one correct choice."
 msgstr "Одне запитання, чотири варіанти відповіді, один правильний."
 
+#: .\quizzes\templates\quizzes\question_editor.html:10
 msgid "Remove"
 msgstr "Видалити"
 
+#: .\quizzes\templates\quizzes\question_editor.html:18
+msgid ""
+"JPEG, PNG, WebP or GIF, up to 5 MB. Keep empty to retain the current image."
+msgstr "JPEG, PNG, WebP або GIF, до 5 МБ. Залиште поле порожнім, щоб зберегти поточне зображення."
+
+#: .\quizzes\templates\quizzes\question_editor.html:24
 msgid "Answers"
 msgstr "Відповіді"
 
+#: .\quizzes\templates\quizzes\question_editor.html:25
 msgid "Select the correct one"
 msgstr "Оберіть правильну"
 
+#: .\quizzes\templates\quizzes\question_form.html:4
+#: .\quizzes\templates\quizzes\question_form.html:9
 msgid "Add a question"
 msgstr "Додати запитання"
 
+#: .\quizzes\templates\quizzes\question_form.html:10
 msgid "Write a question, set the time limit and mark the correct answer."
 msgstr ""
 "Напишіть запитання, встановіть обмеження часу та позначте правильну "
 "відповідь."
 
+#: .\quizzes\templates\quizzes\question_form.html:14
 msgid "Answer options"
 msgstr "Варіанти відповідей"
 
+#: .\quizzes\templates\quizzes\question_form.html:15
 msgid "Add at least two options and mark the correct one."
 msgstr "Додайте щонайменше два варіанти та позначте правильний."
 
+#: .\quizzes\templates\quizzes\question_form.html:23
 msgid "Save question"
 msgstr "Зберегти запитання"
 
+#: .\quizzes\templates\quizzes\question_form.html:24
 msgid "Back to quiz"
 msgstr "Повернутися до вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:16
+msgid "Remove from favorites"
+msgstr "Видалити з обраного"
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:16
+msgid "Save to favorites"
+msgstr "Додати до обраного"
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:23
+msgid "Follow author"
+msgstr "Підписатися на автора"
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:25
+#: .\quizzes\templates\quizzes\statistics.html:3
+#: .\quizzes\templates\quizzes\statistics.html:5
+msgid "Author statistics"
+msgstr "Статистика автора"
+
+#: .\quizzes\templates\quizzes\quiz_detail.html:29
 msgid "Author"
 msgstr "Автор"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:30
+#: .\quizzes\templates\quizzes\quiz_take.html:19
 msgid "questions"
 msgstr "запитань"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:32
 msgid "Private"
 msgstr "Приватна"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:36
+#: .\quizzes\templates\quizzes\quiz_join.html:14
 msgid "Invite code"
 msgstr "Код запрошення"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:43
 msgid "Liked"
 msgstr "Вподобано"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:43
 msgid "Like"
 msgstr "Подобається"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:48
 msgid "Take quiz"
 msgstr "Пройти вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:50
+#: .\quizzes\templates\quizzes\quiz_rating.html:4
 msgid "Rating"
 msgstr "Рейтинг"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:54
 msgid "This quiz has no questions yet."
 msgstr "У цій вікторині поки немає запитань."
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:58
+#: .\quizzes\templates\quizzes\quiz_form.html:4
+#: .\quizzes\templates\quizzes\quiz_form.html:9
 msgid "Edit quiz"
 msgstr "Редагувати вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:59
 msgid "Delete this quiz permanently?"
 msgstr "Видалити цю вікторину назавжди?"
 
+#: .\quizzes\templates\quizzes\quiz_detail.html:61
 msgid "Delete quiz"
 msgstr "Видалити вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:8
 msgid "Quiz editor"
 msgstr "Редактор вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:8
 msgid "New project"
 msgstr "Нова вікторина"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:10
 msgid "Set up the quiz and all its questions in one place."
 msgstr "Налаштуйте вікторину та всі її запитання в одному місці."
 
+#: .\quizzes\templates\quizzes\quiz_form.html:26
 msgid "Questions"
 msgstr "Запитання"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:27
 msgid "Add questions and mark one correct answer for each."
 msgstr "Додайте запитання та позначте одну правильну відповідь для кожного."
 
+#: .\quizzes\templates\quizzes\quiz_form.html:29
 msgid "Add question"
 msgstr "Додати запитання"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:42
 msgid "Save quiz"
 msgstr "Зберегти вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_form.html:43
 msgid "Cancel"
 msgstr "Скасувати"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:9
 msgid "Your games"
 msgstr "Ваші ігри"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:10
 msgid "Results history"
 msgstr "Історія результатів"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:21
 msgid "Open quiz"
 msgstr "Відкрити вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:27
 msgid "No history yet"
 msgstr "Історія поки порожня"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:28
 msgid "Your completed games will appear here"
 msgstr "Тут з'являтимуться пройдені вами вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_history.html:29
 msgid "Go to quizzes"
 msgstr "До вікторин"
 
+#: .\quizzes\templates\quizzes\quiz_join.html:4
+#: .\quizzes\templates\quizzes\quiz_join.html:9
 msgid "Join a private quiz"
 msgstr "Приєднатися до приватної вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_join.html:8
 msgid "Invite only"
 msgstr "Лише за запрошенням"
 
+#: .\quizzes\templates\quizzes\quiz_join.html:10
 msgid "Enter the code shared by the quiz author."
 msgstr "Введіть код, яким поділився автор вікторини."
 
+#: .\quizzes\templates\quizzes\quiz_join.html:17
 msgid "Join quiz"
 msgstr "Приєднатися до вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_join.html:18
 msgid "Back home"
 msgstr "На головну"
 
+#: .\quizzes\templates\quizzes\quiz_list.html:11
 msgid "Your drafts, private and published quizzes."
 msgstr "Ваші чернетки, приватні та опубліковані вікторини."
 
+#: .\quizzes\templates\quizzes\quiz_list.html:11
 msgid "Choose a topic and test your knowledge."
 msgstr "Оберіть тему та перевірте свої знання."
 
+#: .\quizzes\templates\quizzes\quiz_list.html:22
+msgid "All categories"
+msgstr "Усі категорії"
+
+#: .\quizzes\templates\quizzes\quiz_list.html:25
 msgid "Search by quiz title"
 msgstr "Пошук за назвою вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_list.html:26
 msgid "Search"
 msgstr "Шукати"
 
+#: .\quizzes\templates\quizzes\quiz_list.html:44
 msgid "Check your knowledge in this quiz."
 msgstr "Перевірте свої знання в цій вікторині."
 
+#: .\quizzes\templates\quizzes\quiz_list.html:46
 msgid "View →"
 msgstr "Переглянути →"
 
+#: .\quizzes\templates\quizzes\quiz_list.html:52
 msgid "Nothing here yet"
 msgstr "Тут поки порожньо"
 
-msgid "No published quizzes yet"
-msgstr "Опублікованих вікторин поки немає"
+#: .\quizzes\templates\quizzes\quiz_list.html:53
+#: .\quizzes\templates\quizzes\statistics.html:13
+msgid "No quizzes found"
+msgstr "Вікторин не знайдено"
 
+#: .\quizzes\templates\quizzes\quiz_list.html:54
 msgid "Create the first quiz and share it with others."
 msgstr "Створіть першу вікторину та поділіться нею з іншими."
 
+#: .\quizzes\templates\quizzes\quiz_list.html:55
 msgid "Create the first quiz"
 msgstr "Створити першу вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:9
 msgid "Leaderboard"
 msgstr "Таблиця лідерів"
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:19
 msgid "Guest"
 msgstr "Гість"
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:27
 msgid "No attempts yet"
 msgstr "Спроб поки немає"
 
+#: .\quizzes\templates\quizzes\quiz_rating.html:28
 msgid "Be the first one to complete this quiz"
 msgstr "Пройдіть цю вікторину першим"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:4
 msgid "Result"
 msgstr "Результат"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:8
 msgid "Quiz completed"
 msgstr "Вікторину завершено"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:9
 msgid "Your result"
 msgstr "Ваш результат"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:10
 msgid "Quiz:"
 msgstr "Вікторина:"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:12
 #, python-format
 msgid "Correct answers: %(score)s out of %(total)s."
 msgstr "Правильних відповідей: %(score)s із %(total)s."
 
+#: .\quizzes\templates\quizzes\quiz_result.html:14
 msgid "Try again"
 msgstr "Спробувати ще раз"
 
+#: .\quizzes\templates\quizzes\quiz_result.html:15
 msgid "Back to quizzes"
 msgstr "До списку вікторин"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:9
 msgid "Quiz mode"
 msgstr "Режим вікторини"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:14
 msgid "Time left"
 msgstr "Залишилося часу"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:20
 msgid "Choose one answer per question"
 msgstr "Оберіть одну відповідь для кожного запитання"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:30
 #, python-format
 msgid "Question %(question_number)s of %(total)s"
 msgstr "Запитання %(question_number)s із %(total)s"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:37
 msgid "Open media"
 msgstr "Відкрити медіа"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:49
 msgid "Next question"
 msgstr "Наступне запитання"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:50
 msgid "Finish quiz"
 msgstr "Завершити вікторину"
 
+#: .\quizzes\templates\quizzes\quiz_take.html:51
 msgid "Go back"
 msgstr "Повернутися"
 
+#: .\quizzes\templates\quizzes\statistics.html:7
+#: .\quizzes\templates\quizzes\statistics.html:11
+msgid "Attempts"
+msgstr "Спроби"
+
+#: .\quizzes\templates\quizzes\statistics.html:8
+#: .\quizzes\templates\quizzes\statistics.html:11
+msgid "Average result"
+msgstr "Середній результат"
+
+#: .\quizzes\templates\quizzes\statistics.html:15
+msgid "Questions with the most errors"
+msgstr "Запитання з найбільшою кількістю помилок"
+
+#: .\quizzes\templates\quizzes\statistics.html:16
+msgid ""
+"Question statistics include attempts recorded after this feature was added. "
+"Skipped questions count as errors."
+msgstr "Статистика запитань враховує спроби після додавання цієї функції. Пропущені запитання вважаються помилками."
+
+#: .\quizzes\templates\quizzes\statistics.html:18
+msgid "Responses"
+msgstr "Відповіді"
+
+#: .\quizzes\templates\quizzes\statistics.html:18
+msgid "Error rate"
+msgstr "Частка помилок"
+
+#: .\quizzes\templates\quizzes\statistics.html:20
+msgid "No response data yet"
+msgstr "Даних про відповіді поки немає"
+
+#: .\quizzes\views.py:98
 msgid "Quiz not found"
 msgstr "Вікторину не знайдено"
 
+#: .\quizzes\views.py:133
 msgid "Quiz with this code was not found."
 msgstr "Вікторину з таким кодом не знайдено."
+
+#: .\quizzes\views.py:187
+msgid "Question not found"
+msgstr "Запитання не знайдено"
+
+#~ msgid "No published quizzes yet"
+#~ msgstr "Опублікованих вікторин поки немає"
 
 #~ msgid "Time for this question"
 #~ msgstr "Час на це запитання"

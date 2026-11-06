@@ -29,10 +29,14 @@
         <fieldset class="question-card" data-question-time="{{ question.time_limit }}"{% if not forloop.first %} hidden{% endif %}>
             <div class="question-progress">{% blocktrans with question_number=forloop.counter total=questions|length %}Question {{ question_number }} of {{ total }}{% endblocktrans %}</div>
             <legend>{{ forloop.counter }}. {{ question.text }}</legend>
-            {% if question.media_url %}
+            {% if question.image %}
+                <img class="question-image" src="{{ question.image.url }}" alt="{{ question.text }}">
+            {% elif question.question_type == 'image' and question.media_url %}
+                <img class="question-image" src="{{ question.media_url }}" alt="{{ question.text }}" referrerpolicy="no-referrer">
+            {% elif question.media_url %}
                 <p><a href="{{ question.media_url }}" target="_blank" rel="noreferrer">{% trans 'Open media' %}</a></p>
             {% endif %}
-            {% for answer in question.answers.all %}
+            {% for answer in question.display_answers %}
                 <label class="answer-option">
                     <input type="radio" name="question_{{ question.pk }}" value="{{ answer.pk }}">
                     {{ answer.text }}

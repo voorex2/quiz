@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import formset_factory, inlineformset_factory
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import Answer, Question, Quiz
 
@@ -15,7 +15,7 @@ class QuizForm(forms.ModelForm):
 
     class Meta:
         model = Quiz
-        fields = ('title', 'description', 'is_published', 'is_private')
+        fields = ('title', 'description', 'category', 'shuffle_answers', 'shuffle_questions', 'is_published', 'is_private')
 
 
 class QuestionForm(forms.ModelForm):
@@ -49,6 +49,9 @@ class AnswerForm(forms.ModelForm):
 
 
 class QuestionEditorForm(forms.Form):
+    question_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
+    image = forms.ImageField(required=False, label=_('Image upload'))
+    remove_image = forms.BooleanField(required=False, label=_('Remove image'))
     text = forms.CharField(required=False)
     question_type = forms.ChoiceField(choices=Question.QuestionType.choices, required=False)
     media_url = forms.URLField(required=False)
@@ -63,6 +66,12 @@ class QuestionEditorForm(forms.Form):
         required=False,
     )
     DELETE = forms.BooleanField(required=False)
+
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        if image and (image.size > 5 * 1024 * 1024 or image.image.format not in ('JPEG', 'PNG', 'WEBP', 'GIF')):
+            raise forms.ValidationError(_('Upload a JPEG, PNG, WebP or GIF image up to 5 MB.'))
+        return image
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

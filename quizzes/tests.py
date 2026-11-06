@@ -44,7 +44,7 @@ class QuizTests(TestCase):
         response = self.client.get('/quizzes/?q=матем')
 
         self.assertContains(response, 'Математика')
-        self.assertNotContains(response, 'Історія')
+        self.assertEqual([quiz.title for quiz in response.context['quizzes']], ['Математика'])
 
     def test_my_quizzes_filter_shows_only_current_user_quizzes(self):
         owner = User.objects.create_user(username='owner', password='StrongPassword123!')

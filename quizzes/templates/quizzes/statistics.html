@@ -1,0 +1,22 @@
+{% extends 'login/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Author statistics' %}{% endblock %}
+{% block content %}
+<h1>{% trans 'Author statistics' %}</h1>
+<div class="quiz-meta">
+    <span class="meta-pill">{% trans 'Attempts' %}: {{ summary.attempt_count }}</span>
+    <span class="meta-pill">{% trans 'Average result' %}: {{ summary.average|default_if_none:0|floatformat:1 }}%</span>
+</div>
+<div class="table-scroll"><table class="data-table">
+    <thead><tr><th>{% trans 'Quiz' %}</th><th>{% trans 'Attempts' %}</th><th>{% trans 'Average result' %}</th></tr></thead>
+    <tbody>{% for quiz in quizzes %}<tr><td><a href="{{ quiz.get_absolute_url }}">{{ quiz.title }}</a></td><td>{{ quiz.attempt_count }}</td><td>{{ quiz.average|default_if_none:0|floatformat:1 }}%</td></tr>
+    {% empty %}<tr><td colspan="3">{% trans 'No quizzes found' %}</td></tr>{% endfor %}</tbody>
+</table></div>
+<h2>{% trans 'Questions with the most errors' %}</h2>
+<p>{% trans 'Question statistics include attempts recorded after this feature was added. Skipped questions count as errors.' %}</p>
+<div class="table-scroll"><table class="data-table">
+    <thead><tr><th>{% trans 'Question' %}</th><th>{% trans 'Quiz' %}</th><th>{% trans 'Responses' %}</th><th>{% trans 'Error rate' %}</th></tr></thead>
+    <tbody>{% for question in questions %}<tr><td>{{ question.text }}</td><td>{{ question.quiz.title }}</td><td>{{ question.response_count }}</td><td>{{ question.error_rate }}%</td></tr>
+    {% empty %}<tr><td colspan="4">{% trans 'No response data yet' %}</td></tr>{% endfor %}</tbody>
+</table></div>
+{% endblock %}
